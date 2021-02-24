@@ -157,7 +157,7 @@ style object for button text
 
 ### renderCustomizedButtonChild
 callback function recieves selected item and its index, this function should return a React component as a child for dropdown button `buttonStyle` should be used for parent button view style.
-####### check examples folder to make things clear
+#### # check examples folder to make things clear
 
 | Type       | Required |
 | ---------- | -------- |
@@ -219,7 +219,7 @@ style object for row text
 ### renderCustomizedRowChild
 callback function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
 
-####### check examples folder to make things clear
+#### # check examples folder to make things clear
 
 | Type       | Required |
 | ---------- | -------- |
