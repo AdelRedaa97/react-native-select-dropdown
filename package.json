@@ -2,17 +2,23 @@
 {
   "name": "react-native-select-dropdown",
   "version": "1.0.0",
-  "description": "",
+  "description": "react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "android",
+    "ios",
+    "dropdown",
+    "select",
+    "option",
+    "selector",
+    "picker",
+    "menu",
+    "modal"
   ],
-  "author": "",
-  "license": "",
-  "peerDependencies": {
-    "react-native": "^0.41.2"
-  }
+  "author": "Adel Reda (AdelRedaa97)",
+  "license": "MIT"
 }
