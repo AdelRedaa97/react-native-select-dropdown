@@ -17,12 +17,12 @@ yarn add react-native-select-dropdown
 ```
 
 ## Demo
-####Code provided in Examples folder.
+#### Code provided in Examples folder.
 
 [![Screenshot1.gif](https://i.postimg.cc/jjpKJqR8/Screenshot1.gif)](https://postimg.cc/sB4bkrQS) 
 [![Screenshot2.gif](https://i.postimg.cc/L50xn5p5/Screenshot2.gif)](https://postimg.cc/XBdfPVX6)
 
-##Usage
+## Usage
 
 ```
 import SelectDropdown from 'react-native-select-dropdown'
@@ -83,7 +83,7 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 ---
 
-###data
+### data
 array of data that will be represented in dropdown 'can be array of objects
 
 | Type       | Required |
@@ -92,7 +92,7 @@ array of data that will be represented in dropdown 'can be array of objects
 
 ---
 
-###onSelect
+### onSelect
 callback function recieves selected item and its index in data array
 
 | Type       | Required |
@@ -101,7 +101,7 @@ callback function recieves selected item and its index in data array
 
 ---
 
-###defaultButtonText
+### defaultButtonText
 default button text when no item is selected
 
 | Type       | Required |
@@ -110,7 +110,7 @@ default button text when no item is selected
 
 ---
 
-###buttonTextAfterSelection
+### buttonTextAfterSelection
 callback function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
 
 | Type       | Required |
@@ -119,7 +119,7 @@ callback function recieves selected item and its index, this function should ret
 
 ---
 
-###rowTextForSelection
+### rowTextForSelection
 callback function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
 
 | Type       | Required |
@@ -128,7 +128,7 @@ callback function recieves item and index for each row in dropdown, this functio
 
 ---
 
-###defaultValueByIndex
+### defaultValueByIndex
 default selected item index
 
 | Type       | Required |
@@ -137,7 +137,7 @@ default selected item index
 
 ---
 
-###buttonStyle
+### buttonStyle
 style object for button
 
 | Type       | Required |
@@ -146,7 +146,7 @@ style object for button
 
 ---
 
-###buttonTextStyle
+### buttonTextStyle
 style object for button text
 
 | Type       | Required |
@@ -155,7 +155,7 @@ style object for button text
 
 ---
 
-###renderCustomizedButtonChild
+### renderCustomizedButtonChild
 callback function recieves selected item and its index, this function should return a React component as a child for dropdown button `buttonStyle` should be used for parent button view style.
 ####### check examples folder to make things clear
 
@@ -165,7 +165,7 @@ callback function recieves selected item and its index, this function should ret
 
 ---
 
-###renderDropdownIcon
+### renderDropdownIcon
 function that should return a React component for dropdown icon
 
 | Type       | Required |
@@ -174,7 +174,7 @@ function that should return a React component for dropdown icon
 
 ---
 
-###dropdownIconPosition
+### dropdownIconPosition
 dropdown icon position "left" || "right"
 
 | Type       | Required |
@@ -183,7 +183,7 @@ dropdown icon position "left" || "right"
 
 ---
 
-###statusBarTranslucent
+### statusBarTranslucent
 required to set true when statusbar is translucent `(android only)`
 
 | Type       | Required |
@@ -192,7 +192,7 @@ required to set true when statusbar is translucent `(android only)`
 
 ---
 
-###dropdownStyle
+### dropdownStyle
 style object for dropdown view
 
 | Type       | Required |
@@ -200,7 +200,7 @@ style object for dropdown view
 | object | No       |
 
 ---
-###rowStyle
+### rowStyle
 style object for row
 
 | Type       | Required |
@@ -208,7 +208,7 @@ style object for row
 | object | Yes       |
 
 ---
-###rowTextStyle
+### rowTextStyle
 style object for row text
 
 | Type       | Required |
@@ -216,7 +216,7 @@ style object for row text
 | object | No       |
 
 ---
-###renderCustomizedRowChild
+### renderCustomizedRowChild
 callback function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
 
 ####### check examples folder to make things clear
