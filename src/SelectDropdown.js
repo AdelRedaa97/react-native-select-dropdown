@@ -158,7 +158,6 @@ const SelectDropdown = ({
       setDropdownHEIGHT(150);
     }
   }, [dropdownStyle]);
-
   useEffect(() => {
     isReset && reset();
   }, [isReset]);
