@@ -32,6 +32,7 @@ const SelectDropdown = ({
   rowStyle /* object */ /* style object for row */,
   rowTextStyle /* object */ /* style object for row text */,
   renderCustomizedRowChild /* function */ /* callback function recieves item and its index, this function should return React component as a child for customized row */,
+  isReset, // boolean, to call reset() when it true
 }) => {
   ///////////////////////////////////////////////////////
   const DropdownButton = useRef(); // button ref to get positions
@@ -157,6 +158,9 @@ const SelectDropdown = ({
       setDropdownHEIGHT(150);
     }
   }, [dropdownStyle]);
+  useEffect(() => {
+    isReset && reset();
+  }, [isReset]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
   const openDropdown = () => {
