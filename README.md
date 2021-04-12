@@ -81,6 +81,12 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`renderCustomizedRowChild`](#renderCustomizedRowChild)
 
+### Methods
+
+- [`reset`](#License)
+- [`openDropdown`](#License)
+- [`closeDropdown`](#License)
+
 ---
 
 ### data
@@ -224,6 +230,14 @@ callback function recieves item and its index, this function should return React
 | Type       | Required |
 | ---------- | -------- |
 | function | No       |
+
+---
+
+Method            |  Description
+----------------- |  -----------
+`reset()`     |  Remove selection & reset it to display `defaultButtonText` check https://github.com/AdelRedaa97/react-native-select-dropdown/pull/1#issuecomment-818307624.
+`openDropdown()`          |  Open the dropdown.
+`closeDropdown()`          |  Close the dropdown.
 
 ---
 
