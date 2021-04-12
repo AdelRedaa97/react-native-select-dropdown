@@ -81,6 +81,12 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`renderCustomizedRowChild`](#renderCustomizedRowChild)
 
+### Methods
+
+- [`reset`](#Methods)
+- [`openDropdown`](#Methods)
+- [`closeDropdown`](#Methods)
+
 ---
 
 ### data
@@ -224,6 +230,14 @@ callback function recieves item and its index, this function should return React
 | Type       | Required |
 | ---------- | -------- |
 | function | No       |
+
+---
+
+Method            |  Description
+----------------- |  -----------
+`reset()`     |  Remove selection & reset it to display `defaultButtonText`.
+`openDropdown()`          |  Open the dropdown.
+`closeDropdown()`          |  Close the dropdown.
 
 ---
 
