@@ -83,9 +83,9 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 ### Methods
 
-- [`reset`](#Methods)
-- [`openDropdown`](#Methods)
-- [`closeDropdown`](#Methods)
+- [`reset`](#License)
+- [`openDropdown`](#License)
+- [`closeDropdown`](#License)
 
 ---
 
@@ -235,7 +235,7 @@ callback function recieves item and its index, this function should return React
 
 Method            |  Description
 ----------------- |  -----------
-`reset()`     |  Remove selection & reset it to display `defaultButtonText`.
+`reset()`     |  Remove selection & reset it to display `defaultButtonText` check https://github.com/AdelRedaa97/react-native-select-dropdown/pull/1#issuecomment-818307624.
 `openDropdown()`          |  Open the dropdown.
 `closeDropdown()`          |  Close the dropdown.
 
