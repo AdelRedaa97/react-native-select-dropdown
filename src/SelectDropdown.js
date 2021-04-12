@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import {
   View,
   Text,
@@ -9,31 +15,45 @@ import {
   ActivityIndicator,
   Modal,
   I18nManager,
-} from 'react-native';
-const { width, height } = Dimensions.get('window');
+} from "react-native";
+const { width, height } = Dimensions.get("window");
 
-const SelectDropdown = ({
-  data /* array */ /* array of data that will be represented in dropdown 'can be array of objects' */,
-  onSelect /* function  */ /* callback function recieves selected item and its index in data array */,
-  defaultButtonText /* String */ /* default button text when no item is selected */,
-  buttonTextAfterSelection /* function */ /* callback function recieves selected item and its index, this function should return a string that will be represented in button after item is selected  */,
-  rowTextForSelection /* function */ /* callback function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown */,
-  defaultValueByIndex /* integer */ /* default selected item index */,
-  /////////////////////////////
-  buttonStyle /* object */ /* style object for button */,
-  buttonTextStyle /* object */ /* style object for button text */,
-  renderCustomizedButtonChild /* function */ /* callback function recieves selected item and its index, this function should return a React component as a child for dropdown button */,
-  /////////////////////////////
-  renderDropdownIcon /* function */ /* function that should return a React component for dropdown icon */,
-  dropdownIconPosition /* string */ /* dropdown icon position "left" || "right" */,
-  statusBarTranslucent /* boolean */ /* required to set true when statusbar is translucent (android only) */,
-  dropdownStyle /* object */ /* style object for dropdown view */,
-  /////////////////////////////
-  rowStyle /* object */ /* style object for row */,
-  rowTextStyle /* object */ /* style object for row text */,
-  renderCustomizedRowChild /* function */ /* callback function recieves item and its index, this function should return React component as a child for customized row */,
-  isReset, // boolean, to call reset() when it true
-}) => {
+const SelectDropdown = (
+  {
+    data /* array */,
+    onSelect /* function  */,
+    defaultButtonText /* String */,
+    buttonTextAfterSelection /* function */,
+    rowTextForSelection /* function */,
+    defaultValueByIndex /* integer */,
+    /////////////////////////////
+    buttonStyle /* style object for button */,
+    buttonTextStyle /* style object for button text */,
+    renderCustomizedButtonChild /* function returns React component for customized button */,
+    /////////////////////////////
+    renderDropdownIcon,
+    dropdownIconPosition,
+    statusBarTranslucent,
+    dropdownStyle,
+    /////////////////////////////
+    rowStyle /* style object for row */,
+    rowTextStyle /* style object for row text */,
+    renderCustomizedRowChild /* function returns React component for customized row */,
+  },
+  ref
+) => {
+  ///////////////////////////////////////////////////////
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      reset();
+    },
+    openDropdown: () => {
+      openDropdown();
+    },
+    closeDropdown: () => {
+      closeDropdown();
+    },
+  }));
   ///////////////////////////////////////////////////////
   const DropdownButton = useRef(); // button ref to get positions
   const [isVisible, setIsVisible] = useState(false); // dropdown visible ?
@@ -50,78 +70,78 @@ const SelectDropdown = ({
   /* ********************* Style ********************* */
   const styles = StyleSheet.create({
     dropdownButton: {
-      flexDirection: dropdownIconPosition == 'left' ? 'row' : 'row-reverse',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#EFEFEF',
+      flexDirection: dropdownIconPosition == "left" ? "row" : "row-reverse",
+      justifyContent: "space-between",
+      alignItems: "center",
+      backgroundColor: "#EFEFEF",
       width: width / 2,
       height: 50,
       paddingHorizontal: 8,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     dropdownButtonText: {
       flex: 1,
       fontSize: 18,
-      color: '#000000',
-      textAlign: 'center',
+      color: "#000000",
+      textAlign: "center",
       marginHorizontal: 8,
     },
     dropdownCustomizedButtonParent: {
       flex: 1,
       marginHorizontal: 8,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     //////////////////////////////////////
     dropdownOverlay: {
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0,0,0,0.3)",
     },
     dropdownOverlayView: {
-      backgroundColor: '#EFEFEF',
+      backgroundColor: "#EFEFEF",
     },
     dropdownOverlayViewForce: {
-      position: 'absolute',
+      position: "absolute",
       top: dropdownPY,
       height: dropdownHEIGHT,
       width: dropdownWIDTH,
       borderTopWidth: 0,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     dropdownOverlayViewForceRTL: I18nManager.isRTL
       ? { right: dropdownPX }
       : { left: dropdownPX },
     dropdownActivityIndicatorView: {
-      width: '100%',
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
+      width: "100%",
+      height: "100%",
+      justifyContent: "center",
+      alignItems: "center",
     },
     //////////////////////////////////////
     dropdownRow: {
       flex: 1,
       height: 50,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderBottomColor: '#C5C5C5',
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      borderBottomColor: "#C5C5C5",
       borderBottomWidth: 1,
     },
     dropdownRowText: {
       flex: 1,
       fontSize: 18,
-      color: '#000000',
-      textAlign: 'center',
+      color: "#000000",
+      textAlign: "center",
       marginHorizontal: 8,
     },
     dropdownCustomizedRowParent: {
       flex: 1,
       marginHorizontal: 8,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     //////////////////////////////////////
     shadow: {
-      shadowColor: '#000',
+      shadowColor: "#000",
       shadowOffset: { width: 0, height: 6 },
       shadowOpacity: 0.1,
       shadowRadius: 10,
@@ -132,7 +152,7 @@ const SelectDropdown = ({
   /* ******************* useEffect ******************* */
   useEffect(() => {
     // data array changes
-    if (data) {
+    if (data.length == 0) {
       reset();
       if (defaultValueByIndex && data && data[defaultValueByIndex]) {
         setDefault(defaultValueByIndex);
@@ -158,9 +178,6 @@ const SelectDropdown = ({
       setDropdownHEIGHT(150);
     }
   }, [dropdownStyle]);
-  useEffect(() => {
-    isReset && reset();
-  }, [isReset]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
   const openDropdown = () => {
@@ -194,7 +211,7 @@ const SelectDropdown = ({
     return (
       isVisible && (
         <Modal
-          animationType='none'
+          animationType="none"
           transparent={true}
           statusBarTranslucent={
             statusBarTranslucent ? statusBarTranslucent : false
@@ -218,7 +235,7 @@ const SelectDropdown = ({
           >
             {!data || data.length == 0 ? (
               <View style={[styles.dropdownActivityIndicatorView]}>
-                <ActivityIndicator size='small' color={'#999999'} />
+                <ActivityIndicator size="small" color={"#999999"} />
               </View>
             ) : (
               <ScrollView>
@@ -281,7 +298,9 @@ const SelectDropdown = ({
               ? buttonTextAfterSelection
                 ? buttonTextAfterSelection(selectedItem, index)
                 : selectedItem
-              : null,
+              : defaultButtonText
+              ? defaultButtonText
+              : "Select an option.",
             index
           )}
         </View>
@@ -297,11 +316,11 @@ const SelectDropdown = ({
               : selectedItem
             : defaultButtonText
             ? defaultButtonText
-            : 'Select an option.'}
+            : "Select an option."}
         </Text>
       )}
     </TouchableOpacity>
   );
 };
 
-export default SelectDropdown;
+export default forwardRef((props, ref) => SelectDropdown(props, ref));
