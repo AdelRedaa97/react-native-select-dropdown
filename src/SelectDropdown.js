@@ -26,6 +26,7 @@ const SelectDropdown = (
     buttonTextAfterSelection /* function */,
     rowTextForSelection /* function */,
     defaultValueByIndex /* integer */,
+    disabled /* boolean */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -217,7 +218,7 @@ const SelectDropdown = (
             statusBarTranslucent ? statusBarTranslucent : false
           }
           visible={isVisible}
-          // style={[styles.dropdownOverlay]}
+        // style={[styles.dropdownOverlay]}
         >
           <TouchableOpacity
             activeOpacity={1}
@@ -284,6 +285,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   return (
     <TouchableOpacity
+      disabled={disabled}
       ref={DropdownButton}
       activeOpacity={0.5}
       style={[styles.dropdownButton, buttonStyle]}
@@ -299,8 +301,8 @@ const SelectDropdown = (
                 ? buttonTextAfterSelection(selectedItem, index)
                 : selectedItem
               : defaultButtonText
-              ? defaultButtonText
-              : "Select an option.",
+                ? defaultButtonText
+                : "Select an option.",
             index
           )}
         </View>
@@ -315,8 +317,8 @@ const SelectDropdown = (
               ? buttonTextAfterSelection(selectedItem, index)
               : selectedItem
             : defaultButtonText
-            ? defaultButtonText
-            : "Select an option."}
+              ? defaultButtonText
+              : "Select an option."}
         </Text>
       )}
     </TouchableOpacity>
