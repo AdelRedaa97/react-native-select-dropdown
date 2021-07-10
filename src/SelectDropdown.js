@@ -30,6 +30,7 @@ const SelectDropdown = (
     rowTextForSelection /* function */,
     defaultValue /* any */,
     defaultValueByIndex /* integer */,
+    disabled /* boolean */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -342,6 +343,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   return (
     <TouchableOpacity
+      disabled={disabled}
       ref={DropdownButton}
       activeOpacity={0.5}
       style={[styles.dropdownButton, buttonStyle]}
