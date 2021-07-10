@@ -59,7 +59,11 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`rowTextForSelection`](#rowTextForSelection)
 
+- [`defaultValue`](#defaultValue)
+
 - [`defaultValueByIndex`](#defaultValueByIndex)
+
+- [`disabled`](#disabled)
 
 - [`buttonStyle`](#buttonStyle)
 
@@ -134,12 +138,30 @@ callback function recieves item and index for each row in dropdown, this functio
 
 ---
 
+### defaultValue
+default selected item in dropdown ( check examples in Demo1)
+
+| Type       | Required |
+| ---------- | -------- |
+| any | No    |
+
+---
+
 ### defaultValueByIndex
 default selected item index
 
 | Type       | Required |
 | ---------- | -------- |
 | integer | No    |
+
+---
+
+### disabled
+disable dropdown
+
+| Type       | Required |
+| ---------- | -------- |
+| boolean | No    |
 
 ---
 
