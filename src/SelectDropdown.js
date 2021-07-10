@@ -16,7 +16,10 @@ import {
   Modal,
   I18nManager,
 } from "react-native";
+import _ from "lodash";
 const { width, height } = Dimensions.get("window");
+
+const DROPDOWN_MAX_HEIGHT = height * 0.4;
 
 const SelectDropdown = (
   {
@@ -25,6 +28,7 @@ const SelectDropdown = (
     defaultButtonText /* String */,
     buttonTextAfterSelection /* function */,
     rowTextForSelection /* function */,
+    defaultValue /* any */,
     defaultValueByIndex /* integer */,
     /////////////////////////////
     buttonStyle /* style object for button */,
@@ -55,13 +59,32 @@ const SelectDropdown = (
     },
   }));
   ///////////////////////////////////////////////////////
+  // Dropdown height calculation
+  const calculateDropdownHeight = () => {
+    if (dropdownStyle && dropdownStyle.height) {
+      return dropdownStyle.height;
+    } else {
+      if (!data || data.length == 0) {
+        return 150;
+      } else {
+        if (rowStyle && rowStyle.height) {
+          const height = rowStyle.height * data.length;
+          return height < DROPDOWN_MAX_HEIGHT ? height : DROPDOWN_MAX_HEIGHT;
+        } else {
+          const height = 50 * data.length;
+          return height < DROPDOWN_MAX_HEIGHT ? height : DROPDOWN_MAX_HEIGHT;
+        }
+      }
+    }
+  };
+  ///////////////////////////////////////////////////////
   const DropdownButton = useRef(); // button ref to get positions
   const [isVisible, setIsVisible] = useState(false); // dropdown visible ?
   const [dropdownPX, setDropdownPX] = useState(0); // position x
   const [dropdownPY, setDropdownPY] = useState(0); // position y
-  const [dropdownHEIGHT, setDropdownHEIGHT] = useState(
-    dropdownStyle && dropdownStyle.height ? dropdownStyle.height : 150
-  ); // dropdown height
+  const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
+    return calculateDropdownHeight();
+  }); // dropdown height
   const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
   ///////////////////////////////////////////////////////
   const [selectedItem, setSelectedItem] = useState(null); // selected item from dropdown
@@ -95,7 +118,7 @@ const SelectDropdown = (
     dropdownOverlay: {
       width: "100%",
       height: "100%",
-      backgroundColor: "rgba(0,0,0,0.3)",
+      backgroundColor: "rgba(0,0,0,0.4)",
     },
     dropdownOverlayView: {
       backgroundColor: "#EFEFEF",
@@ -157,6 +180,9 @@ const SelectDropdown = (
       if (defaultValueByIndex && data && data[defaultValueByIndex]) {
         setDefault(defaultValueByIndex);
       }
+      if (defaultValue && data && findIndexInArr(defaultValue, data) >= 0) {
+        setDefault(findIndexInArr(defaultValue, data));
+      }
     }
   }, [data]);
   useEffect(() => {
@@ -171,13 +197,16 @@ const SelectDropdown = (
     }
   }, [defaultValueByIndex]);
   useEffect(() => {
-    // for height changes
-    if (dropdownStyle && dropdownStyle.height) {
-      setDropdownHEIGHT(dropdownStyle.height);
-    } else {
-      setDropdownHEIGHT(150);
+    if (defaultValue && data) {
+      if (findIndexInArr(defaultValue, data) >= 0) {
+        setDefault(findIndexInArr(defaultValue, data));
+      }
     }
-  }, [dropdownStyle]);
+  }, [defaultValue]);
+  useEffect(() => {
+    // for height changes
+    setDropdownHEIGHT(calculateDropdownHeight());
+  }, [dropdownStyle, data]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
   const openDropdown = () => {
@@ -205,6 +234,35 @@ const SelectDropdown = (
   const setDefault = (index) => {
     setSelectedItem(data[index]);
     setIndex(index);
+  };
+  const findIndexInArr = (obj, arr) => {
+    if (typeof obj == "object") {
+      var defaultValueIndex = -1;
+      for (let index = 0; index < arr.length; index++) {
+        const element = arr[index];
+        if (_.isEqual(element, defaultValue)) {
+          defaultValueIndex = index;
+        }
+        if (index == arr.length - 1) {
+          if (defaultValueIndex >= 0) {
+            setDefault(defaultValueIndex);
+          }
+        }
+      }
+    } else {
+      var defaultValueIndex = -1;
+      for (let index = 0; index < arr.length; index++) {
+        const element = arr[index];
+        if (element == defaultValue) {
+          defaultValueIndex = index;
+        }
+        if (index == arr.length - 1) {
+          if (defaultValueIndex >= 0) {
+            setDefault(defaultValueIndex);
+          }
+        }
+      }
+    }
   };
   ///////////////////////////////////////////////////////
   const renderDropdown = () => {
@@ -293,16 +351,7 @@ const SelectDropdown = (
       {renderDropdownIcon && renderDropdownIcon()}
       {renderCustomizedButtonChild ? (
         <View style={[styles.dropdownCustomizedButtonParent]}>
-          {renderCustomizedButtonChild(
-            selectedItem
-              ? buttonTextAfterSelection
-                ? buttonTextAfterSelection(selectedItem, index)
-                : selectedItem
-              : defaultButtonText
-              ? defaultButtonText
-              : "Select an option.",
-            index
-          )}
+          {renderCustomizedButtonChild(selectedItem, index)}
         </View>
       ) : (
         <Text
