@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 const { width, height } = Dimensions.get("window");
-import SelectDropdown from "./react-native-select-dropdown";
+import SelectDropdown from "react-native-select-dropdown";
 
 export default Dropdown2 = () => {
   const [countries, setCountries] = useState([]);
