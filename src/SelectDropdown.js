@@ -90,6 +90,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   const [selectedItem, setSelectedItem] = useState(null); // selected item from dropdown
   const [index, setIndex] = useState(-1); // index of selected item from dropdown
+  const dropDownScrollViewRef = useRef(null); // ref to the drop down ScrollView
   ///////////////////////////////////////////////////////
   /* ********************* Style ********************* */
   const styles = StyleSheet.create({
@@ -297,7 +298,16 @@ const SelectDropdown = (
                 <ActivityIndicator size="small" color={"#999999"} />
               </View>
             ) : (
-              <ScrollView>
+              <ScrollView
+                ref={(ref) => (dropDownScrollViewRef.current = ref)}
+                onLayout={() => {
+                  if (index >= 3 && dropDownScrollViewRef) {
+                    dropDownScrollViewRef.current.scrollTo({
+                      y: (rowStyle.height ?? 50) * index,
+                    });
+                  }
+                }}
+              >
                 {data.map((item, index) => {
                   return (
                     <TouchableOpacity
