@@ -303,7 +303,10 @@ const SelectDropdown = (
                 onLayout={() => {
                   if (index >= 3 && dropDownScrollViewRef) {
                     dropDownScrollViewRef.current.scrollTo({
-                      y: (rowStyle.height ?? 50) * index,
+                      y:
+                        rowStyle && rowStyle.height
+                          ? rowStyle.height * index
+                          : 50 * index,
                     });
                   }
                 }}
