@@ -103,7 +103,7 @@ array of data that will be represented in dropdown 'can be array of objects
 ---
 
 ### onSelect
-callback function recieves selected item and its index in data array
+function recieves selected item and its index in data array
 
 | Type       | Required |
 | ---------- | -------- |
@@ -121,7 +121,7 @@ default button text when no item is selected
 ---
 
 ### buttonTextAfterSelection
-callback function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
+function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
 
 | Type       | Required |
 | ---------- | -------- |
@@ -130,7 +130,7 @@ callback function recieves selected item and its index, this function should ret
 ---
 
 ### rowTextForSelection
-callback function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
+function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
 
 | Type       | Required |
 | ---------- | -------- |
@@ -184,7 +184,7 @@ style object for button text
 ---
 
 ### renderCustomizedButtonChild
-callback function recieves selected item and its index, this function should return a React component as a child for dropdown button `buttonStyle` should be used for parent button view style.
+function recieves selected item and its index, this function should return a React component as a child for dropdown button `buttonStyle` should be used for parent button view style.
 #### # check examples folder to make things clear
 
 | Type       | Required |
@@ -245,7 +245,7 @@ style object for row text
 
 ---
 ### renderCustomizedRowChild
-callback function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
+function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
 
 #### # check examples folder to make things clear
 
