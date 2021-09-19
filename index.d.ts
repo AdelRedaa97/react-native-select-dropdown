@@ -38,7 +38,7 @@ declare module "react-native-select-dropdown" {
     /**
      * style object for button
      */
-    buttonStyle: StyleProp<ViewStyle>;
+    buttonStyle?: StyleProp<ViewStyle>;
     /**
      * style object for button text
      */
@@ -66,7 +66,7 @@ declare module "react-native-select-dropdown" {
     /**
      * style object for row
      */
-    rowStyle: StyleProp<ViewStyle>;
+    rowStyle?: StyleProp<ViewStyle>;
     /**
      * style object for row text
      */
@@ -74,7 +74,7 @@ declare module "react-native-select-dropdown" {
     /**
      * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
      */
-    renderCustomizedRowChild: (selectedItem: any, index: number) => React.ReactNode;
+    renderCustomizedRowChild?: (selectedItem: any, index: number) => React.ReactNode;
   };
 
   export default class SelectDropdown extends React.Component<SelectDropdownProps> {
