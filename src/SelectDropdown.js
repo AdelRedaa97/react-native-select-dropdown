@@ -271,6 +271,7 @@ const SelectDropdown = (
     return (
       isVisible && (
         <Modal
+          supportedOrientations={['portrait', 'landscape']}
           animationType="none"
           transparent={true}
           statusBarTranslucent={
