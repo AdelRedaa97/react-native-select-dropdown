@@ -10,7 +10,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
+  FlatList,
   Dimensions,
   ActivityIndicator,
   Modal,
@@ -90,7 +90,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   const [selectedItem, setSelectedItem] = useState(null); // selected item from dropdown
   const [index, setIndex] = useState(-1); // index of selected item from dropdown
-  const dropDownScrollViewRef = useRef(null); // ref to the drop down ScrollView
+  const dropDownFlatlistRef = useRef(null); // ref to the drop down flatlist
   ///////////////////////////////////////////////////////
   /* ********************* Style ********************* */
   const styles = StyleSheet.create({
@@ -113,7 +113,7 @@ const SelectDropdown = (
     },
     dropdownCustomizedButtonParent: {
       flex: 1,
-      marginHorizontal: 8,
+      // marginHorizontal: 8,
       overflow: "hidden",
     },
     //////////////////////////////////////
@@ -161,7 +161,7 @@ const SelectDropdown = (
     },
     dropdownCustomizedRowParent: {
       flex: 1,
-      marginHorizontal: 8,
+      // marginHorizontal: 8,
       overflow: "hidden",
     },
     //////////////////////////////////////
@@ -267,6 +267,38 @@ const SelectDropdown = (
     }
   };
   ///////////////////////////////////////////////////////
+  /* ******************** Render Methods ******************** */
+  const renderFlatlistItem = ({ item, index }) => {
+    return (
+      <TouchableOpacity
+        key={index.toString()}
+        style={[styles.dropdownRow, rowStyle]}
+        onPress={() => {
+          closeDropdown();
+          onSelect(item, index);
+          setSelectedItem(item);
+          setIndex(index);
+        }}
+      >
+        {renderCustomizedRowChild ? (
+          <View style={[styles.dropdownCustomizedRowParent]}>
+            {renderCustomizedRowChild(
+              rowTextForSelection ? rowTextForSelection(item, index) : item,
+              index
+            )}
+          </View>
+        ) : (
+          <Text
+            numberOfLines={1}
+            allowFontScaling={false}
+            style={[styles.dropdownRowText, rowTextStyle]}
+          >
+            {rowTextForSelection ? rowTextForSelection(item, index) : item}
+          </Text>
+        )}
+      </TouchableOpacity>
+    );
+  };
   const renderDropdown = () => {
     return (
       isVisible && (
@@ -298,55 +330,31 @@ const SelectDropdown = (
                 <ActivityIndicator size="small" color={"#999999"} />
               </View>
             ) : (
-              <ScrollView
-                ref={(ref) => (dropDownScrollViewRef.current = ref)}
+              <FlatList
+                data={data}
+                keyExtractor={(item, index) => index}
+                ref={(ref) => (dropDownFlatlistRef.current = ref)}
+                renderItem={renderFlatlistItem}
+                getItemLayout={(data, index) => ({
+                  index,
+                  length: data.length,
+                  offset:
+                    rowStyle && rowStyle.height
+                      ? rowStyle.height * index
+                      : 50 * index,
+                })}
                 onLayout={() => {
-                  if (index >= 3 && dropDownScrollViewRef) {
-                    dropDownScrollViewRef.current.scrollTo({
-                      y:
+                  if (index >= 3 && dropDownFlatlistRef) {
+                    dropDownFlatlistRef.current.scrollToOffset({
+                      offset:
                         rowStyle && rowStyle.height
                           ? rowStyle.height * index
                           : 50 * index,
+                      animated: true,
                     });
                   }
                 }}
-              >
-                {data.map((item, index) => {
-                  return (
-                    <TouchableOpacity
-                      key={index.toString()}
-                      style={[styles.dropdownRow, rowStyle]}
-                      onPress={() => {
-                        closeDropdown();
-                        onSelect(item, index);
-                        setSelectedItem(item);
-                        setIndex(index);
-                      }}
-                    >
-                      {renderCustomizedRowChild ? (
-                        <View style={[styles.dropdownCustomizedRowParent]}>
-                          {renderCustomizedRowChild(
-                            rowTextForSelection
-                              ? rowTextForSelection(item, index)
-                              : item,
-                            index
-                          )}
-                        </View>
-                      ) : (
-                        <Text
-                          numberOfLines={1}
-                          allowFontScaling={false}
-                          style={[styles.dropdownRowText, rowTextStyle]}
-                        >
-                          {rowTextForSelection
-                            ? rowTextForSelection(item, index)
-                            : item}
-                        </Text>
-                      )}
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
+              />
             )}
           </View>
         </Modal>
