@@ -217,12 +217,11 @@ const SelectDropdown = (
       if (height - 18 < py + h + dropdownHEIGHT) {
         setDropdownPX(px);
         setDropdownPY(py - 2 - dropdownHEIGHT);
-        setDropdownWIDTH(w);
       } else {
         setDropdownPX(px);
         setDropdownPY(py + h + 2);
-        setDropdownWIDTH(w);
       }
+      setDropdownWIDTH(dropdownStyle?.width || w);
     });
     setIsVisible(true);
   };
