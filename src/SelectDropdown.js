@@ -332,7 +332,7 @@ const SelectDropdown = (
             ) : (
               <FlatList
                 data={data}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => index.toString()}
                 ref={(ref) => (dropDownFlatlistRef.current = ref)}
                 renderItem={renderFlatlistItem}
                 getItemLayout={(data, index) => ({
