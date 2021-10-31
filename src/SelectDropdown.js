@@ -270,7 +270,6 @@ const SelectDropdown = (
   const renderFlatlistItem = ({ item, index }) => {
     return (
       <TouchableOpacity
-        key={index.toString()}
         style={[styles.dropdownRow, rowStyle]}
         onPress={() => {
           closeDropdown();
