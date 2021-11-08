@@ -134,8 +134,8 @@ const SelectDropdown = (
       overflow: "hidden",
     },
     dropdownOverlayViewForceRTL: I18nManager.isRTL
-      ? { right: dropdownPX }
-      : { left: dropdownPX },
+    ? { right: dropdownStyle?.right || dropdownPX }
+    : { left: dropdownStyle?.left || dropdownPX },
     dropdownActivityIndicatorView: {
       width: "100%",
       height: "100%",
