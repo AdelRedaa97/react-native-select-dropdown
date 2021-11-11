@@ -79,6 +79,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`dropdownStyle`](#dropdownStyle)
 
+- [`dropdownOverlayColor`](#dropdownOverlayColor)
+
 - [`rowStyle`](#rowStyle)
 
 - [`rowTextStyle`](#rowTextStyle)
@@ -226,6 +228,15 @@ style object for dropdown view
 | Type       | Required |
 | ---------- | -------- |
 | object | No       |
+
+---
+
+### dropdownOverlayColor
+backdrop color when dropdown is opened
+
+| Type       | Required |
+| ---------- | -------- |
+| string | No       |
 
 ---
 ### rowStyle
