@@ -40,6 +40,7 @@ const SelectDropdown = (
     dropdownIconPosition,
     statusBarTranslucent,
     dropdownStyle,
+    dropdownOverlayColor /* backdrop color when dropdown is opened */,
     /////////////////////////////
     rowStyle /* style object for row */,
     rowTextStyle /* style object for row text */,
@@ -312,7 +313,10 @@ const SelectDropdown = (
         >
           <TouchableOpacity
             activeOpacity={1}
-            style={[styles.dropdownOverlay]}
+            style={[
+              styles.dropdownOverlay, 
+              !!dropdownOverlayColor && { backgroundColor: dropdownOverlayColor }
+            ]}
             onPress={() => closeDropdown()}
           />
           <View
