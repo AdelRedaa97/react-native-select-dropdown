@@ -37,6 +37,7 @@ const SelectDropdown = (
     renderCustomizedButtonChild /* function returns React component for customized button */,
     /////////////////////////////
     renderDropdownIcon,
+    renderDropdownIconWhenOpen, /* the icon when the dropdown is open*/
     dropdownIconPosition,
     statusBarTranslucent,
     dropdownStyle,
@@ -374,7 +375,7 @@ const SelectDropdown = (
       onPress={() => openDropdown()}
     >
       {renderDropdown()}
-      {renderDropdownIcon && renderDropdownIcon()}
+      {isVisible ? renderDropdownIconWhenOpen && renderDropdownIconWhenOpen() : renderDropdownIcon && renderDropdownIcon()}
       {renderCustomizedButtonChild ? (
         <View style={[styles.dropdownCustomizedButtonParent]}>
           {renderCustomizedButtonChild(selectedItem, index)}
