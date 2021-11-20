@@ -375,7 +375,7 @@ const SelectDropdown = (
       onPress={() => openDropdown()}
     >
       {renderDropdown()}
-      {isVisible ? renderDropdownIconWhenOpen && renderDropdownIconWhenOpen() : renderDropdownIcon && renderDropdownIcon()}
+      {isVisible ? renderDropdownIcon2 ?  renderDropdownIcon2 && renderDropdownIcon2() : renderDropdownIcon && renderDropdownIcon() : renderDropdownIcon && renderDropdownIcon()}
       {renderCustomizedButtonChild ? (
         <View style={[styles.dropdownCustomizedButtonParent]}>
           {renderCustomizedButtonChild(selectedItem, index)}
