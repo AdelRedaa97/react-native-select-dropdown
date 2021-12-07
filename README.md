@@ -73,6 +73,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`renderDropdownIcon`](#renderDropdownIcon)
 
+- [`renderSecondaryDropdownIcon`](#renderSecondaryDropdownIcon)
+
 - [`dropdownIconPosition`](#dropdownIconPosition)
 
 - [`statusBarTranslucent`](#statusBarTranslucent)
@@ -197,6 +199,15 @@ function recieves selected item and its index, this function should return a Rea
 
 ### renderDropdownIcon
 function that should return a React component for dropdown icon
+
+| Type       | Required |
+| ---------- | -------- |
+| function | No       |
+
+---
+
+### renderSecondaryDropdownIcon
+function that should return a React component for dropdown icon, used when dropdown is open
 
 | Type       | Required |
 | ---------- | -------- |

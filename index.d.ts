@@ -52,6 +52,10 @@ declare module "react-native-select-dropdown" {
      */
     renderDropdownIcon?: (selectedItem: any, index: number) => React.ReactNode;
     /**
+     * function that should return a React component for dropdown icon, used when dropdown is open
+     */
+    renderSecondaryDropdownIcon?: (selectedItem: any, index: number) => React.ReactNode;
+    /**
      * dropdown icon position "left" || "right"
      */
     dropdownIconPosition?: "left" | "right";
