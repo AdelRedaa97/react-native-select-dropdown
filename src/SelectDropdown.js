@@ -302,7 +302,7 @@ const SelectDropdown = (
     return (
       isVisible && (
         <Modal
-          supportedOrientations={['portrait', 'landscape']}
+          supportedOrientations={["portrait", "landscape"]}
           animationType="none"
           transparent={true}
           statusBarTranslucent={
@@ -314,8 +314,10 @@ const SelectDropdown = (
           <TouchableOpacity
             activeOpacity={1}
             style={[
-              styles.dropdownOverlay, 
-              !!dropdownOverlayColor && { backgroundColor: dropdownOverlayColor }
+              styles.dropdownOverlay,
+              !!dropdownOverlayColor && {
+                backgroundColor: dropdownOverlayColor,
+              },
             ]}
             onPress={() => closeDropdown()}
           />
@@ -374,7 +376,7 @@ const SelectDropdown = (
       onPress={() => openDropdown()}
     >
       {renderDropdown()}
-      {renderDropdownIcon && renderDropdownIcon()}
+      {renderDropdownIcon && renderDropdownIcon(isVisible)}
       {renderCustomizedButtonChild ? (
         <View style={[styles.dropdownCustomizedButtonParent]}>
           {renderCustomizedButtonChild(selectedItem, index)}

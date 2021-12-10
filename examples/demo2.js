@@ -66,9 +66,13 @@ export default Dropdown2 = () => {
               }}
               buttonStyle={styles.dropdown1BtnStyle}
               buttonTextStyle={styles.dropdown1BtnTxtStyle}
-              renderDropdownIcon={() => {
+              renderDropdownIcon={(isOpened) => {
                 return (
-                  <FontAwesome name="chevron-down" color={"#444"} size={18} />
+                  <FontAwesome
+                    name={isOpened ? "chevron-up" : "chevron-down"}
+                    color={"#444"}
+                    size={18}
+                  />
                 );
               }}
               dropdownIconPosition={"right"}
@@ -92,9 +96,13 @@ export default Dropdown2 = () => {
               }}
               buttonStyle={styles.dropdown2BtnStyle}
               buttonTextStyle={styles.dropdown2BtnTxtStyle}
-              renderDropdownIcon={() => {
+              renderDropdownIcon={(isOpened) => {
                 return (
-                  <FontAwesome name="chevron-down" color={"#444"} size={18} />
+                  <FontAwesome
+                    name={isOpened ? "chevron-up" : "chevron-down"}
+                    color={"#444"}
+                    size={18}
+                  />
                 );
               }}
               dropdownIconPosition={"right"}
