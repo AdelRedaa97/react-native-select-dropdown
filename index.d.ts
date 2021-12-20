@@ -36,6 +36,10 @@ declare module "react-native-select-dropdown" {
      */
     disabled?: boolean;
     /**
+     * disable auto scroll to selected value
+     */
+    disableAutoScroll?: boolean;
+    /**
      * style object for button
      */
     buttonStyle?: StyleProp<ViewStyle>;
@@ -63,6 +67,10 @@ declare module "react-native-select-dropdown" {
      * style object for dropdown view
      */
     dropdownStyle?: StyleProp<ViewStyle>;
+    /**
+     * backdrop color when dropdown is opened 
+     */
+    dropdownOverlayColor?: string;
     /**
      * style object for row
      */

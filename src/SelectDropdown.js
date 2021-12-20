@@ -31,6 +31,7 @@ const SelectDropdown = (
     defaultValue /* any */,
     defaultValueByIndex /* integer */,
     disabled /* boolean */,
+    disableAutoScroll /* boolean */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -40,7 +41,7 @@ const SelectDropdown = (
     dropdownIconPosition,
     statusBarTranslucent,
     dropdownStyle,
-    dropdownOverlayColor /* backdrop color when dropdown is opened */,
+    dropdownOverlayColor /* string */,
     /////////////////////////////
     rowStyle /* style object for row */,
     rowTextStyle /* style object for row text */,
@@ -266,6 +267,23 @@ const SelectDropdown = (
       }
     }
   };
+  const getItemLayout = (data, index) => ({
+    index,
+    length: data.length,
+    offset: rowStyle && rowStyle.height ? rowStyle.height * index : 50 * index,
+  });
+  const onLayout = () => {
+    if (disableAutoScroll) {
+      return;
+    }
+    if (index >= 3 && dropDownFlatlistRef) {
+      dropDownFlatlistRef.current.scrollToOffset({
+        offset:
+          rowStyle && rowStyle.height ? rowStyle.height * index : 50 * index,
+        animated: true,
+      });
+    }
+  };
   ///////////////////////////////////////////////////////
   /* ******************** Render Methods ******************** */
   const renderFlatlistItem = ({ item, index }) => {
@@ -340,25 +358,8 @@ const SelectDropdown = (
                 keyExtractor={(item, index) => index.toString()}
                 ref={(ref) => (dropDownFlatlistRef.current = ref)}
                 renderItem={renderFlatlistItem}
-                getItemLayout={(data, index) => ({
-                  index,
-                  length: data.length,
-                  offset:
-                    rowStyle && rowStyle.height
-                      ? rowStyle.height * index
-                      : 50 * index,
-                })}
-                onLayout={() => {
-                  if (index >= 3 && dropDownFlatlistRef) {
-                    dropDownFlatlistRef.current.scrollToOffset({
-                      offset:
-                        rowStyle && rowStyle.height
-                          ? rowStyle.height * index
-                          : 50 * index,
-                      animated: true,
-                    });
-                  }
-                }}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
               />
             )}
           </View>
