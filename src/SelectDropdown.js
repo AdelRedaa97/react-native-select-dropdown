@@ -224,8 +224,8 @@ const SelectDropdown = (
         setDropdownPY(py + h + 2);
       }
       setDropdownWIDTH(dropdownStyle?.width || w);
+      setIsVisible(true);
     });
-    setIsVisible(true);
   };
   const closeDropdown = () => {
     setIsVisible(false);
