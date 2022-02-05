@@ -269,6 +269,15 @@ backdrop color when dropdown is opened
 | string | No       |
 
 ---
+### dropdownBackgroundColor
+
+background color behind list items when dropdown is opened
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
 
 ### rowStyle
 
