@@ -42,6 +42,7 @@ const SelectDropdown = (
     statusBarTranslucent,
     dropdownStyle,
     dropdownOverlayColor /* string */,
+    dropdownBackgroundColor /* string */,
     /////////////////////////////
     rowStyle /* style object for row */,
     rowTextStyle /* style object for row text */,
@@ -355,6 +356,11 @@ const SelectDropdown = (
             ) : (
               <FlatList
                 data={data}
+                style={[
+                  !!dropdownBackgroundColor && {
+                    backgroundColor: dropdownBackgroundColor,
+                  },
+                ]}
                 keyExtractor={(item, index) => index.toString()}
                 ref={(ref) => (dropDownFlatlistRef.current = ref)}
                 renderItem={renderFlatlistItem}

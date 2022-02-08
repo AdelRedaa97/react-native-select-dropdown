@@ -1,4 +1,4 @@
-import type * as React from 'react';
+import type * as React from "react";
 import { StyleProp, ViewStyle, TextStyle } from "react-native";
 
 declare module "react-native-select-dropdown" {
@@ -71,6 +71,10 @@ declare module "react-native-select-dropdown" {
      * backdrop color when dropdown is opened 
      */
     dropdownOverlayColor?: string;
+    /**
+     * background color behind list items when dropdown is opened
+     */
+    dropdownBackgroundColor?: string;
     /**
      * style object for row
      */
