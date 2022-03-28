@@ -72,10 +72,6 @@ declare module "react-native-select-dropdown" {
      */
     dropdownOverlayColor?: string;
     /**
-     * background color behind list items when dropdown is opened
-     */
-    dropdownBackgroundColor?: string;
-    /**
      * style object for row
      */
     rowStyle?: StyleProp<ViewStyle>;
