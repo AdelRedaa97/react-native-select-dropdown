@@ -20,12 +20,7 @@ yarn add react-native-select-dropdown
 
 #### Code provided in Examples folder.
 
-<!-- [![Screenshot1.gif](https://i.postimg.cc/jjpKJqR8/Screenshot1.gif)](https://postimg.cc/sB4bkrQS) -->
-
 [![Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif](https://i.postimg.cc/4yYR8V3L/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif)](https://postimg.cc/64xPq7nn)
-
-<!-- [![Screenshot2.gif](https://i.postimg.cc/L50xn5p5/Screenshot2.gif)](https://postimg.cc/XBdfPVX6) -->
-
 [![Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif](https://i.postimg.cc/m2fkJgQX/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif)](https://postimg.cc/grsG6dt8)
 
 ## Usage
