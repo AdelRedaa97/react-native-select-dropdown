@@ -194,8 +194,6 @@ disable auto scroll to selected value
 
 ---
 
----
-
 ### onFocus
 
 function fires when dropdown is opened
@@ -203,8 +201,6 @@ function fires when dropdown is opened
 | Type     | Required |
 | -------- | -------- |
 | function | No       |
-
----
 
 ---
 
