@@ -16,6 +16,8 @@ const SelectDropdown = (
     defaultValueByIndex /* integer */,
     disabled /* boolean */,
     disableAutoScroll /* boolean */,
+    onFocus /* function  */,
+    onBlur /* function  */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -96,10 +98,12 @@ const SelectDropdown = (
       }
       setDropdownWIDTH(dropdownStyle?.width || w);
       setIsVisible(true);
+      onFocus && onFocus();
     });
   };
   const closeDropdown = () => {
     setIsVisible(false);
+    onBlur && onBlur();
   };
   const reset = () => {
     setSelectedItem(null);

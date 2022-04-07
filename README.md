@@ -68,6 +68,10 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`disableAutoScroll`](#disableAutoScroll)
 
+- [`onFocus`](#onFocus)
+
+- [`onBlur`](#onBlur)
+
 - [`buttonStyle`](#buttonStyle)
 
 - [`buttonTextStyle`](#buttonTextStyle)
@@ -187,6 +191,30 @@ disable auto scroll to selected value
 | Type    | Required |
 | ------- | -------- |
 | boolean | No       |
+
+---
+
+---
+
+### onFocus
+
+function fires when dropdown is opened
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+---
+
+### onBlur
+
+function fires when dropdown is closed
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
 
 ---
 

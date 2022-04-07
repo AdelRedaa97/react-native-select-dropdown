@@ -40,6 +40,14 @@ declare module "react-native-select-dropdown" {
      */
     disableAutoScroll?: boolean;
     /**
+      * function fires when dropdown is opened
+      */
+    onFocus?: () => void;
+    /**
+      * function fires when dropdown is closed
+      */
+    onBlur?: () => void;
+    /**
      * style object for button
      */
     buttonStyle?: StyleProp<ViewStyle>;
