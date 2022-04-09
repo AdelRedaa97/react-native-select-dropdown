@@ -70,8 +70,11 @@ const SelectDropdown = (
   }, [data]);
   // default value by index added or changed
   useEffect(() => {
-    if (defaultValueByIndex && data && data[defaultValueByIndex]) {
-      setDefault(defaultValueByIndex);
+    // defaultValueByIndex may be equals zero
+    if (defaultValueByIndex != undefined && defaultValueByIndex != null) {
+      if (data && data[defaultValueByIndex]) {
+        setDefault(defaultValueByIndex);
+      }
     }
   }, [defaultValueByIndex]);
   // default value added or changed
