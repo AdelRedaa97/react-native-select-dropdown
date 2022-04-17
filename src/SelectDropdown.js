@@ -18,6 +18,7 @@ const SelectDropdown = (
     disableAutoScroll /* boolean */,
     onFocus /* function  */,
     onBlur /* function  */,
+    search /* boolean */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -50,6 +51,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   const DropdownButton = useRef(); // button ref to get positions
   const [isVisible, setIsVisible] = useState(false); // dropdown visible ?
+  const [buttonLayout, setButtonLayout] = useState(null);
   const [dropdownPX, setDropdownPX] = useState(0); // position x
   const [dropdownPY, setDropdownPY] = useState(0); // position y
   const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
@@ -95,6 +97,7 @@ const SelectDropdown = (
   const openDropdown = () => {
     DropdownButton.current.measure((fx, fy, w, h, px, py) => {
       // console.log('position y => ', py, '\nheight', h, '\nposition x => ', px)
+      setButtonLayout({w, h, px, py});
       if (height - 18 < py + h + dropdownHEIGHT) {
         setDropdownPX(px);
         setDropdownPY(py - 2 - dropdownHEIGHT);
@@ -178,6 +181,19 @@ const SelectDropdown = (
               }),
             }}
           />
+          <View
+            style={{
+              ...{
+                height: 50,
+                backgroundColor: 'red',
+                position: 'absolute',
+                top: buttonLayout.py,
+                width: buttonLayout.w,
+              },
+              ...(I18nManager.isRTL
+                ? {right: dropdownStyle?.right || buttonLayout.px}
+                : {left: dropdownStyle?.left || buttonLayout.px}),
+            }}></View>
           <View
             style={{
               ...styles.dropdownOverlayView,
