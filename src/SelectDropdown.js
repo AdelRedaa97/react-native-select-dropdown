@@ -79,8 +79,11 @@ const SelectDropdown = (
   }, [defaultValueByIndex]);
   // default value added or changed
   useEffect(() => {
-    if (defaultValue && data && findIndexInArr(defaultValue, data) >= 0) {
-      setDefault(findIndexInArr(defaultValue, data));
+    // defaultValue may be equals zero
+    if (defaultValue != undefined && defaultValue != null) {
+      if (data && findIndexInArr(defaultValue, data) >= 0) {
+        setDefault(findIndexInArr(defaultValue, data));
+      }
     }
   }, [defaultValue]);
   // for height changes
@@ -142,7 +145,10 @@ const SelectDropdown = (
   /* ******************** Render Methods ******************** */
   const renderFlatlistItem = ({item, index}) => {
     return (
-      <TouchableOpacity style={{...styles.dropdownRow, ...rowStyle}} onPress={() => onSelectItem(item, index)}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={{...styles.dropdownRow, ...rowStyle}}
+        onPress={() => onSelectItem(item, index)}>
         {renderCustomizedRowChild ? (
           <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index)}</View>
         ) : (
@@ -213,7 +219,7 @@ const SelectDropdown = (
     <TouchableOpacity
       ref={DropdownButton}
       disabled={disabled}
-      activeOpacity={0.5}
+      activeOpacity={0.8}
       style={{
         ...styles.dropdownButton,
         ...(dropdownIconPosition == 'left' ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}),
