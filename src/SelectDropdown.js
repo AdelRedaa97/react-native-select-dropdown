@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, FlatList, Dimensions, ActivityIndicator, M
 import styles from './styles';
 import findIndexInArr from './helpers/findIndexInArr';
 import calculateDropdownHeight from './helpers/calculateDropdownHeight';
+import isExist from './helpers/isExist';
 const {height} = Dimensions.get('window');
 
 const SelectDropdown = (
@@ -73,8 +74,8 @@ const SelectDropdown = (
   // default value by index added or changed
   useEffect(() => {
     // defaultValueByIndex may be equals zero
-    if (defaultValueByIndex != undefined && defaultValueByIndex != null) {
-      if (data && data[defaultValueByIndex]) {
+    if (isExist(defaultValueByIndex)) {
+      if (data && isExist(data[defaultValueByIndex])) {
         setDefault(defaultValueByIndex);
       }
     }
@@ -82,7 +83,7 @@ const SelectDropdown = (
   // default value added or changed
   useEffect(() => {
     // defaultValue may be equals zero
-    if (defaultValue != undefined && defaultValue != null) {
+    if (isExist(defaultValue)) {
       if (data && findIndexInArr(defaultValue, data) >= 0) {
         setDefault(findIndexInArr(defaultValue, data));
       }
@@ -248,7 +249,7 @@ const SelectDropdown = (
         <View style={styles.dropdownCustomizedButtonParent}>{renderCustomizedButtonChild(selectedItem, index)}</View>
       ) : (
         <Text numberOfLines={1} allowFontScaling={false} style={{...styles.dropdownButtonText, ...buttonTextStyle}}>
-          {selectedItem
+          {isExist(selectedItem)
             ? buttonTextAfterSelection
               ? buttonTextAfterSelection(selectedItem, index)
               : selectedItem.toString()
