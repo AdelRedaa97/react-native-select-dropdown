@@ -1,12 +1,41 @@
 {
-  "name": "react-native-select-dropdown",
-  "version": "1.13.0",
-  "description": "react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.",
-  "main": "index.js",
-  "typings": "index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_args": [
+    [
+      "react-native-select-dropdown@1.13.0",
+      "/Users/manuelwenner/Development/workspace_finex/hbk-finex-app"
+    ]
+  ],
+  "_from": "react-native-select-dropdown@1.13.0",
+  "_id": "react-native-select-dropdown@1.13.0",
+  "_inBundle": false,
+  "_integrity": "sha512-UGXWbuEqsG6B6O+tle77yJH3+DXfmh4cpit0v8az824y0rZLUWuRzlfeLYlaeZ80mqIF6Xtvx/pBtIsG1OdaLg==",
+  "_location": "/react-native-select-dropdown",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-select-dropdown@1.13.0",
+    "name": "react-native-select-dropdown",
+    "escapedName": "react-native-select-dropdown",
+    "rawSpec": "1.13.0",
+    "saveSpec": null,
+    "fetchSpec": "1.13.0"
   },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-1.13.0.tgz",
+  "_spec": "1.13.0",
+  "_where": "/Users/manuelwenner/Development/workspace_finex/hbk-finex-app",
+  "author": {
+    "name": "Adel Reda",
+    "url": "AdelRedaa97"
+  },
+  "bugs": {
+    "url": "https://github.com/AdelRedaa97/react-native-select-dropdown/issues"
+  },
+  "description": "react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.",
+  "homepage": "https://github.com/AdelRedaa97/react-native-select-dropdown#readme",
   "keywords": [
     "react-native",
     "android",
@@ -19,10 +48,16 @@
     "menu",
     "modal"
   ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "react-native-select-dropdown",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdelRedaa97/react-native-select-dropdown"
+    "url": "git+https://github.com/AdelRedaa97/react-native-select-dropdown.git"
   },
-  "author": "Adel Reda (AdelRedaa97)",
-  "license": "MIT"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "typings": "index.d.ts",
+  "version": "1.13.0"
 }

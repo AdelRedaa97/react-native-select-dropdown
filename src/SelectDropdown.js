@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useRef, forwardRef, useImperativeHandle} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Dimensions, ActivityIndicator, Modal, I18nManager} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, FlatList, Dimensions, ActivityIndicator, Modal, I18nManager} from 'react-native';
 import styles from './styles';
 import findIndexInArr from './helpers/findIndexInArr';
 import calculateDropdownHeight from './helpers/calculateDropdownHeight';
 import isExist from './helpers/isExist';
 const {height} = Dimensions.get('window');
+
+
 
 const SelectDropdown = (
   {
@@ -49,6 +51,12 @@ const SelectDropdown = (
     },
   }));
   ///////////////////////////////////////////////////////
+  const [search, setSearch] = useState("");
+  const [isDisplayingOptions, setIsDisplayingOptions] = useState(false);
+  const [savedItems, setSavedItems] = useState(data);
+  const [items, setItems] = useState(data);
+
+
   const DropdownButton = useRef(); // button ref to get positions
   const [isVisible, setIsVisible] = useState(false); // dropdown visible ?
   const [dropdownPX, setDropdownPX] = useState(0); // position x
@@ -95,7 +103,6 @@ const SelectDropdown = (
   /* ******************** Methods ******************** */
   const openDropdown = () => {
     DropdownButton.current.measure((fx, fy, w, h, px, py) => {
-      // console.log('position y => ', py, '\nheight', h, '\nposition x => ', px)
       if (height - 18 < py + h + dropdownHEIGHT) {
         setDropdownPX(px);
         setDropdownPY(py - 2 - dropdownHEIGHT);
@@ -141,19 +148,27 @@ const SelectDropdown = (
     onSelect(item, index);
     setSelectedItem(item);
     setIndex(index);
+    setSearch(""); // reset search
+    setItems(savedItems); // reset dropdown list
   };
   ///////////////////////////////////////////////////////
   /* ******************** Render Methods ******************** */
   const renderFlatlistItem = ({item, index}) => {
+
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        style={{...styles.dropdownRow, ...rowStyle}}
+        style={[{...styles.dropdownRow, ...rowStyle}, item == selectedItem ? styles.selectedElement : '']}
         onPress={() => onSelectItem(item, index)}>
+          
         {renderCustomizedRowChild ? (
           <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index)}</View>
         ) : (
-          <Text numberOfLines={1} allowFontScaling={false} style={[styles.dropdownRowText, rowTextStyle]}>
+          <Text 
+              numberOfLines={1} 
+              allowFontScaling={false} 
+              style={ [styles.dropdownRowText, rowTextStyle]}
+          >
             {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
           </Text>
         )}
@@ -161,6 +176,9 @@ const SelectDropdown = (
     );
   };
   const renderDropdown = () => {
+
+    let inputColor = "#000000";
+    
     return (
       isVisible && (
         <Modal
@@ -201,14 +219,59 @@ const SelectDropdown = (
                 <ActivityIndicator size="small" color={'#999999'} />
               </View>
             ) : (
-              <FlatList
-                data={data}
-                keyExtractor={(item, index) => index.toString()}
-                ref={ref => (dropDownFlatlistRef.current = ref)}
-                renderItem={renderFlatlistItem}
-                getItemLayout={getItemLayout}
-                onLayout={onLayout}
-              />
+              
+              <View>
+                  
+                <View
+                    style={{
+                      ...styles.inputContainer,
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                  <TextInput
+                    placeholderTextColor={inputColor}
+                    color={inputColor}
+                    style={styles.input}
+                    fontStyle={!search || search.length == 0 ? "italic" : "normal"}
+                    placeholder={defaultButtonText}
+                    value={search}
+                    onFocus={() => setIsDisplayingOptions(true)}
+                    isFocus={focused => setIsDisplayingOptions(focused)}
+                    onChangeText={value => {
+                      setSearch(value);
+                      if (value.length === 0) {
+                        setItems(savedItems);
+                      } else {
+                        let data = [];
+                        for (let item of savedItems) {
+                          if(typeof(item) === 'object'){
+                            if (item.name.toLowerCase().includes(value.toLowerCase())) {
+                              data.push(item);
+                            }
+                          }else{
+                            if (item.toLowerCase().includes(value.toLowerCase())) {
+                              data.push(item);
+                            }
+                          }
+                        }
+                        setItems(data);
+                      }
+                    }}
+                  />
+
+                </View>
+
+                <FlatList
+                  data={items}
+                  keyExtractor={(item, index) => index.toString()}
+                  ref={ref => (dropDownFlatlistRef.current = ref)}
+                  renderItem={renderFlatlistItem}
+                  getItemLayout={getItemLayout}
+                  onLayout={onLayout}
+                />
+              </View>
             )}
           </View>
         </Modal>
@@ -230,7 +293,7 @@ const SelectDropdown = (
       {renderDropdown()}
       {renderDropdownIcon && renderDropdownIcon(isVisible)}
       {renderCustomizedButtonChild ? (
-        <View style={styles.dropdownCustomizedButtonParent}>{renderCustomizedButtonChild(selectedItem, index)}</View>
+        <View style={styles.dropdownCustomizedButtonParent}>{renderCustomizedButtonChild(selectedItem, index)}aaaa</View>
       ) : (
         <Text numberOfLines={1} allowFontScaling={false} style={{...styles.dropdownButtonText, ...buttonTextStyle}}>
           {isExist(selectedItem)

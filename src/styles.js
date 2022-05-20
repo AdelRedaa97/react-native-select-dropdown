@@ -66,6 +66,35 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 10,
   },
+
+
+  //// CUSTOM TEXTINPUT/SEARCH FIELD //////////////////////////////////
+  label: {
+    fontSize: 14,
+    marginBottom: 10,
+    marginTop: 10,
+    color: "#000"
+  },
+  input: {
+    // backgroundColor: 'red',
+    paddingLeft: 10,
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderBottomColor: '#000000',
+    borderBottomWidth: 2,
+    height: 50,
+    width: "100%"
+  },
+  inputContainer: {
+    // borderWidth: 1,
+    borderColor: "#000",
+    height: 50,
+    opacity: 0.5,
+    color: "#000",
+  },
+  selectedElement: {
+    backgroundColor: '#CCC'
+  },
 });
 
 export default styles;
