@@ -88,9 +88,45 @@ declare module "react-native-select-dropdown" {
      */
     rowTextStyle?: StyleProp<TextStyle>;
     /**
+     * style object for selected row
+     */
+    selectedRowStyle?: StyleProp<ViewStyle>;
+    /**
+     * style object for selected row text
+     */
+    selectedRowTextStyle?: StyleProp<TextStyle>;
+    /**
      * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
      */
     renderCustomizedRowChild?: (selectedItem: any, index: number) => React.ReactNode;
+    /**
+     * enable search functionality
+     */
+    search?: boolean;
+    /**
+     * style object for search input
+     */
+    searchInputStyle?: StyleProp<ViewStyle>;
+    /**
+     * text color for search input
+     */
+    searchInputTxtColor?: string;
+    /**
+    * placeholder text for search input
+    */
+    searchPlaceHolder?: string;
+    /**
+    * text color for search input placeholder
+    */
+    searchPlaceHolderColor?: string;
+    /**
+     * function returns React component for search input icon
+     */
+    renderSearchInputLeftIcon?: (selectedItem: any, index: number) => React.ReactNode;
+    /**
+    * function returns React component for search input icon
+    */
+    renderSearchInputRightIcon?: (selectedItem: any, index: number) => React.ReactNode;
   };
 
   export default class SelectDropdown extends React.Component<SelectDropdownProps> {

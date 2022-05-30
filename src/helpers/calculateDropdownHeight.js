@@ -1,12 +1,8 @@
-import { Dimensions } from "react-native";
-const { width, height } = Dimensions.get("window");
+import {Dimensions} from 'react-native';
+const {height} = Dimensions.get('window');
 const DROPDOWN_MAX_HEIGHT = height * 0.4;
 
-export default calculateDropdownHeight = (
-  dropdownStyle,
-  rowStyle,
-  dataLength
-) => {
+export const calculateDropdownHeight = (dropdownStyle, rowStyle, dataLength) => {
   if (dropdownStyle && dropdownStyle.height) {
     return dropdownStyle.height;
   } else {

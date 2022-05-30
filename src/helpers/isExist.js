@@ -1,4 +1,4 @@
-export default isExist = value => {
+export const isExist = value => {
   if (value != undefined && value != null) {
     return true;
   }

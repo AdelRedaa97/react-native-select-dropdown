@@ -96,7 +96,25 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`rowTextStyle`](#rowTextStyle)
 
+- [`selectedRowStyle`](#selectedRowStyle)
+
+- [`selectedRowTextStyle`](#selectedRowTextStyle)
+
 - [`renderCustomizedRowChild`](#renderCustomizedRowChild)
+
+- [`search`](#search)
+
+- [`searchInputStyle`](#searchInputStyle)
+
+- [`searchInputTxtColor`](#searchInputTxtColor)
+
+- [`searchPlaceHolder`](#searchPlaceHolder)
+
+- [`searchPlaceHolderColor`](#searchPlaceHolderColor)
+
+- [`renderSearchInputLeftIcon`](#renderSearchInputLeftIcon)
+
+- [`renderSearchInputRightIcon`](#renderSearchInputRightIcon)
 
 ### Methods
 
@@ -328,11 +346,101 @@ style object for row text
 
 ---
 
+### selectedRowStyle
+
+style object for selected row
+
+| Type   | Required |
+| ------ | -------- |
+| object | Yes      |
+
+---
+
+### selectedRowTextStyle
+
+style object for selected row text
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
 ### renderCustomizedRowChild
 
 function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
 
 #### # check examples folder to make things clear
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### search
+
+enable search functionality
+
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
+
+---
+
+### searchInputStyle
+
+style object for search input
+
+| Type   | Required |
+| ------ | -------- |
+| object | Yes      |
+
+---
+
+### searchInputTxtColor
+
+text color for search input
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### searchPlaceHolder
+
+placeholder text for search input
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### searchPlaceHolderColor
+
+text color for search input placeholder
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### renderSearchInputLeftIcon
+
+function returns React component for search input icon
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### renderSearchInputRightIcon
+
+function returns React component for search input icon
 
 | Type     | Required |
 | -------- | -------- |
