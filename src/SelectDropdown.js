@@ -6,6 +6,7 @@ import {calculateDropdownHeight} from './helpers/calculateDropdownHeight';
 import {isExist} from './helpers/isExist';
 import Input from './components/Input';
 import {useKeyboardHeight} from './hooks/useKeyboardHeight';
+import {deepSearchInArr} from './helpers/deepSearchInArr';
 const {height} = Dimensions.get('window');
 
 const SelectDropdown = (
@@ -183,7 +184,7 @@ const SelectDropdown = (
     );
   };
   const renderFlatlistItem = ({item, index}) => {
-    return (
+    return item ? (
       <TouchableOpacity
         activeOpacity={0.8}
         style={{...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle)}}
@@ -199,6 +200,8 @@ const SelectDropdown = (
           </Text>
         )}
       </TouchableOpacity>
+    ) : (
+      <></>
     );
   };
   const renderDropdown = () => {
@@ -246,7 +249,7 @@ const SelectDropdown = (
               </View>
             ) : (
               <FlatList
-                data={data}
+                data={searchTxt ? deepSearchInArr(searchTxt, data) : data}
                 keyExtractor={(item, index) => index.toString()}
                 ref={ref => (dropDownFlatlistRef.current = ref)}
                 renderItem={renderFlatlistItem}
