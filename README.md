@@ -25,6 +25,12 @@ yarn add react-native-select-dropdown
 	<img src="https://i.postimg.cc/m2fkJgQX/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif" width="300" height="650">
 </p>
 
+#### Search Functionality (Code provided in Examples folder).
+
+<p float="left">
+	<img src="https://i.postimg.cc/pTy4CjrV/Simulator-Screen-Recording-i-Phone-12-Pro-2022-05-31-at-13-58-28.gif" width="300" height="650">
+</p>
+
 ## Usage
 
 ```
