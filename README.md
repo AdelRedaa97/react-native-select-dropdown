@@ -20,8 +20,16 @@ yarn add react-native-select-dropdown
 
 #### Code provided in Examples folder.
 
-[![Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif](https://i.postimg.cc/4yYR8V3L/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif)](https://postimg.cc/64xPq7nn)
-[![Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif](https://i.postimg.cc/m2fkJgQX/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif)](https://postimg.cc/grsG6dt8)
+<p float="left">
+	<img src="https://i.postimg.cc/4yYR8V3L/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif" width="300" height="650">
+	<img src="https://i.postimg.cc/m2fkJgQX/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif" width="300" height="650">
+</p>
+
+#### Search Functionality (Code provided in Examples folder).
+
+<p float="left">
+	<img src="https://i.postimg.cc/GmYnZVF0/Simulator-Screen-Recording-i-Phone-12-Pro-2022-05-31-at-13-58-28.gif" width="300" height="650">
+</p>
 
 ## Usage
 
@@ -94,7 +102,25 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`rowTextStyle`](#rowTextStyle)
 
+- [`selectedRowStyle`](#selectedRowStyle)
+
+- [`selectedRowTextStyle`](#selectedRowTextStyle)
+
 - [`renderCustomizedRowChild`](#renderCustomizedRowChild)
+
+- [`search`](#search)
+
+- [`searchInputStyle`](#searchInputStyle)
+
+- [`searchInputTxtColor`](#searchInputTxtColor)
+
+- [`searchPlaceHolder`](#searchPlaceHolder)
+
+- [`searchPlaceHolderColor`](#searchPlaceHolderColor)
+
+- [`renderSearchInputLeftIcon`](#renderSearchInputLeftIcon)
+
+- [`renderSearchInputRightIcon`](#renderSearchInputRightIcon)
 
 ### Methods
 
@@ -326,11 +352,101 @@ style object for row text
 
 ---
 
+### selectedRowStyle
+
+style object for selected row
+
+| Type   | Required |
+| ------ | -------- |
+| object | Yes      |
+
+---
+
+### selectedRowTextStyle
+
+style object for selected row text
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
 ### renderCustomizedRowChild
 
 function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
 
 #### # check examples folder to make things clear
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### search
+
+enable search functionality
+
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
+
+---
+
+### searchInputStyle
+
+style object for search input
+
+| Type   | Required |
+| ------ | -------- |
+| object | Yes      |
+
+---
+
+### searchInputTxtColor
+
+text color for search input
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### searchPlaceHolder
+
+placeholder text for search input
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### searchPlaceHolderColor
+
+text color for search input placeholder
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### renderSearchInputLeftIcon
+
+function returns React component for search input icon
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### renderSearchInputRightIcon
+
+function returns React component for search input icon
 
 | Type     | Required |
 | -------- | -------- |

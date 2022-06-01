@@ -1,8 +1,8 @@
-import _ from "lodash";
+import _ from 'lodash';
 
-export default findIndexInArr = (obj, arr) => {
+export const findIndexInArr = (obj, arr) => {
   var defaultValueIndex = -1;
-  if (typeof obj == "object") {
+  if (typeof obj == 'object') {
     for (let index = 0; index < arr.length; index++) {
       const element = arr[index];
       if (_.isEqual(element, obj)) {
