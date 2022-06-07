@@ -13,6 +13,8 @@ const SelectDropdown = (
   {
     data /* array */,
     onSelect /* function  */,
+    onSelectChange /* function */,
+    selectedValue /* function */,
     defaultButtonText /* String */,
     buttonTextAfterSelection /* function */,
     rowTextForSelection /* function */,
@@ -68,7 +70,7 @@ const SelectDropdown = (
   const [dropdownPX, setDropdownPX] = useState(0); // position x
   const [dropdownPY, setDropdownPY] = useState(0); // position y
   const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
-    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search);
+    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0);
   }); // dropdown height
   const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
   ///////////////////////////////////////////////////////
@@ -107,7 +109,7 @@ const SelectDropdown = (
   }, [defaultValue]);
   // for height changes
   useEffect(() => {
-    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search));
+    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0));
   }, [dropdownStyle, rowStyle, data]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
@@ -160,6 +162,8 @@ const SelectDropdown = (
   const onSelectItem = (item, index) => {
     closeDropdown();
     onSelect(item, index);
+    onSelectChange(item, index);
+    selectedValue(item, index);
     setSelectedItem(item);
     setSelectedIndex(index);
   };
