@@ -2,7 +2,7 @@ const contains = (query, item) => {
   // string, number or boolean
   if (item && typeof item != 'object') {
     const str = item.toString().toLowerCase();
-    if (str.includes(query.toString())) {
+    if (str.includes(query.toString().toLowerCase())) {
       return true;
     }
   } else {
@@ -12,7 +12,7 @@ const contains = (query, item) => {
         return contains(query, item[key]);
       } else {
         const str = item[key].toString().toLowerCase();
-        if (str.includes(query.toString())) {
+        if (str.includes(query.toString().toLowerCase())) {
           return true;
         }
       }

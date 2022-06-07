@@ -68,7 +68,7 @@ const SelectDropdown = (
   const [dropdownPX, setDropdownPX] = useState(0); // position x
   const [dropdownPY, setDropdownPY] = useState(0); // position y
   const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
-    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0);
+    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search);
   }); // dropdown height
   const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
   ///////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ const SelectDropdown = (
   }, [defaultValue]);
   // for height changes
   useEffect(() => {
-    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0));
+    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search));
   }, [dropdownStyle, rowStyle, data]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
