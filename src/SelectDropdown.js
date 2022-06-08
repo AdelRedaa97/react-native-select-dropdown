@@ -1,18 +1,19 @@
-import React, {useEffect, useState, useRef, forwardRef, useImperativeHandle} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Dimensions, ActivityIndicator, Modal, I18nManager} from 'react-native';
+import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
+import { View, Text, TouchableOpacity, FlatList, Dimensions, ActivityIndicator, Modal, I18nManager } from 'react-native';
 import styles from './styles';
-import {findIndexInArr} from './helpers/findIndexInArr';
-import {calculateDropdownHeight} from './helpers/calculateDropdownHeight';
-import {isExist} from './helpers/isExist';
+import { findIndexInArr } from './helpers/findIndexInArr';
+import { calculateDropdownHeight } from './helpers/calculateDropdownHeight';
+import { isExist } from './helpers/isExist';
 import Input from './components/Input';
-import {useKeyboardHeight} from './hooks/useKeyboardHeight';
-import {deepSearchInArr} from './helpers/deepSearchInArr';
-const {height} = Dimensions.get('window');
+import { useKeyboardHeight } from './hooks/useKeyboardHeight';
+import { deepSearchInArr } from './helpers/deepSearchInArr';
+const { height } = Dimensions.get('window');
 
 const SelectDropdown = (
   {
     data /* array */,
     onSelect /* function  */,
+    onSelectChange /* function */,
     defaultButtonText /* String */,
     buttonTextAfterSelection /* function */,
     rowTextForSelection /* function */,
@@ -68,7 +69,7 @@ const SelectDropdown = (
   const [dropdownPX, setDropdownPX] = useState(0); // position x
   const [dropdownPY, setDropdownPY] = useState(0); // position y
   const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
-    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search);
+    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0);
   }); // dropdown height
   const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
   ///////////////////////////////////////////////////////
@@ -107,14 +108,14 @@ const SelectDropdown = (
   }, [defaultValue]);
   // for height changes
   useEffect(() => {
-    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search));
+    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0));
   }, [dropdownStyle, rowStyle, data]);
   ///////////////////////////////////////////////////////
   /* ******************** Methods ******************** */
   const openDropdown = () => {
     DropdownButton.current.measure((fx, fy, w, h, px, py) => {
       // console.log('position y => ', py, '\nheight', h, '\nposition x => ', px)
-      setButtonLayout({w, h, px, py});
+      setButtonLayout({ w, h, px, py });
       if (height - 18 < py + h + dropdownHEIGHT) {
         setDropdownPX(px);
         setDropdownPY(py - 2 - dropdownHEIGHT);
@@ -160,6 +161,7 @@ const SelectDropdown = (
   const onSelectItem = (item, index) => {
     closeDropdown();
     onSelect(item, index);
+    onSelectChange(item, index);
     setSelectedItem(item);
     setSelectedIndex(index);
   };
@@ -168,7 +170,7 @@ const SelectDropdown = (
   const renderSearchView = () => {
     return (
       search && (
-        <View style={{...styles.searchViewStyle, ...{width: buttonLayout.w}}}>
+        <View style={{ ...styles.searchViewStyle, ...{ width: buttonLayout.w } }}>
           <Input
             value={searchTxt}
             valueColor={searchInputTxtColor}
@@ -183,11 +185,11 @@ const SelectDropdown = (
       )
     );
   };
-  const renderFlatlistItem = ({item, index}) => {
+  const renderFlatlistItem = ({ item, index }) => {
     return item ? (
       <TouchableOpacity
         activeOpacity={0.8}
-        style={{...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle)}}
+        style={{ ...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle) }}
         onPress={() => onSelectItem(item, index)}>
         {renderCustomizedRowChild ? (
           <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index)}</View>
@@ -195,7 +197,7 @@ const SelectDropdown = (
           <Text
             numberOfLines={1}
             allowFontScaling={false}
-            style={{...styles.dropdownRowText, ...rowTextStyle, ...(index == selectedIndex && selectedRowTextStyle)}}>
+            style={{ ...styles.dropdownRowText, ...rowTextStyle, ...(index == selectedIndex && selectedRowTextStyle) }}>
             {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
           </Text>
         )}
@@ -240,8 +242,8 @@ const SelectDropdown = (
                 overflow: 'hidden',
               },
               ...(I18nManager.isRTL
-                ? {right: dropdownStyle?.right || dropdownPX}
-                : {left: dropdownStyle?.left || dropdownPX}),
+                ? { right: dropdownStyle?.right || dropdownPX }
+                : { left: dropdownStyle?.left || dropdownPX }),
             }}>
             {!data || data.length == 0 ? (
               <View style={styles.dropdownActivityIndicatorView}>
@@ -272,7 +274,7 @@ const SelectDropdown = (
       activeOpacity={0.8}
       style={{
         ...styles.dropdownButton,
-        ...(dropdownIconPosition == 'left' ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}),
+        ...(dropdownIconPosition == 'left' ? { flexDirection: 'row' } : { flexDirection: 'row-reverse' }),
         ...buttonStyle,
       }}
       onPress={openDropdown}>
@@ -283,7 +285,7 @@ const SelectDropdown = (
           {renderCustomizedButtonChild(selectedItem, selectedIndex)}
         </View>
       ) : (
-        <Text numberOfLines={1} allowFontScaling={false} style={{...styles.dropdownButtonText, ...buttonTextStyle}}>
+        <Text numberOfLines={1} allowFontScaling={false} style={{ ...styles.dropdownButtonText, ...buttonTextStyle }}>
           {isExist(selectedItem)
             ? buttonTextAfterSelection
               ? buttonTextAfterSelection(selectedItem, selectedIndex)

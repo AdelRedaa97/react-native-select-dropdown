@@ -12,6 +12,10 @@ declare module "react-native-select-dropdown" {
       */
     onSelect: (selectedItem: any, index: number) => void;
     /**
+     * function created to be used with react-hook-forms
+     */
+    onSelectChange?: (selectedItem: any, index: number) => void;
+    /**
      * default button text when no item is selected
      */
     defaultButtonText?: string;
