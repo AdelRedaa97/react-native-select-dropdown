@@ -10,7 +10,7 @@ const contains = (query, item) => {
     for (let key in item) {
       if (item[key] && typeof item[key] == 'object') {
         return contains(query, item[key]);
-      } else {
+      } else if (item?.[key]) {
         const str = item[key].toString().toLowerCase();
         if (str.includes(query.toString().toLowerCase())) {
           return true;
