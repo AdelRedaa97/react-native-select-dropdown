@@ -1,19 +1,21 @@
 const contains = (query, item) => {
-  // string, number or boolean
-  if (item && typeof item != 'object') {
-    const str = item.toString().toLowerCase();
-    if (str.includes(query.toString().toLowerCase())) {
-      return true;
-    }
-  } else {
-    // item is an object
-    for (let key in item) {
-      if (item[key] && typeof item[key] == 'object') {
-        return contains(query, item[key]);
-      } else {
-        const str = item[key].toString().toLowerCase();
-        if (str.includes(query.toString().toLowerCase())) {
-          return true;
+  if (item) {
+    // string, number or boolean
+    if (typeof item != 'object') {
+      const str = item.toString().toLowerCase();
+      if (str.includes(query.toString().toLowerCase())) {
+        return true;
+      }
+    } else {
+      // item is an object
+      for (let key in item) {
+        if (item[key] && typeof item[key] == 'object') {
+          return contains(query, item[key]);
+        } else {
+          const str = item[key].toString().toLowerCase();
+          if (str.includes(query.toString().toLowerCase())) {
+            return true;
+          }
         }
       }
     }
