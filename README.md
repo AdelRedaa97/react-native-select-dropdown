@@ -1,6 +1,6 @@
 # react-native-select-dropdown
 
-react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.
+react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for Android and iOS platforms.
 
 ## Installation
 
