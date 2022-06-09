@@ -9,12 +9,14 @@ const contains = (query, item) => {
     } else {
       // item is an object
       for (let key in item) {
-        if (item[key] && typeof item[key] == 'object') {
-          return contains(query, item[key]);
-        } else {
-          const str = item[key].toString().toLowerCase();
-          if (str.includes(query.toString().toLowerCase())) {
-            return true;
+        if (item[key]) {
+          if (typeof item[key] == 'object') {
+            return contains(query, item[key]);
+          } else {
+            const str = item[key].toString().toLowerCase();
+            if (str.includes(query.toString().toLowerCase())) {
+              return true;
+            }
           }
         }
       }
