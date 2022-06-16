@@ -60,6 +60,9 @@ const SelectDropdown = (
     closeDropdown: () => {
       closeDropdown();
     },
+    selectItem: (item, index) => {
+      onSelectItem(item, index);
+    }
   }));
   ///////////////////////////////////////////////////////
   const DropdownButton = useRef(); // button ref to get positions

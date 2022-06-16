@@ -142,5 +142,9 @@ declare module "react-native-select-dropdown" {
      * Close the dropdown.
      */
     closeDropdown(): void;
+    /**
+     * Select a specific element with its index.
+     */
+    selectItem(item: any, index: number): void;
   }
 }
