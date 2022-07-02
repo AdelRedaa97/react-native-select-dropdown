@@ -257,6 +257,7 @@ const SelectDropdown = (
                 onLayout={onLayout}
                 ListHeaderComponent={renderSearchView()}
                 stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
               />
             )}
           </View>
