@@ -30,8 +30,6 @@ export const deepSearchInArr = (query, arr) => {
   for (let i = 0; i <= arr.length - 1; i++) {
     if (contains(query, arr[i])) {
       array.push(arr[i]);
-    } else {
-      array.push(null);
     }
     if (i == arr.length - 1) {
       return array;
