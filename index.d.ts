@@ -111,6 +111,10 @@ declare module "react-native-select-dropdown" {
      * text color for search input
      */
     searchInputTxtColor?: string;
+    /** 
+     * text style for search input
+    */
+    searchInputTxtStyle: StyleProp<TextStyle>;
     /**
     * placeholder text for search input
     */

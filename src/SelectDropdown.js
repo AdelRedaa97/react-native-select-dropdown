@@ -42,6 +42,7 @@ const SelectDropdown = (
     search /* boolean */,
     searchInputStyle /* style object for search input */,
     searchInputTxtColor /* text color for search input */,
+    searchInputTxtStyle /* text style for search input */,
     searchPlaceHolder /* placeholder text for search input */,
     searchPlaceHolderColor /* text color for search input placeholder */,
     renderSearchInputLeftIcon /* function returns React component for search input icon */,
@@ -176,6 +177,7 @@ const SelectDropdown = (
             placeholderTextColor={searchPlaceHolderColor}
             onChangeText={setSearchTxt}
             inputStyle={searchInputStyle}
+            inputTextStyle={searchInputTxtStyle}
             renderLeft={renderSearchInputLeftIcon}
             renderRight={renderSearchInputRightIcon}
           />
