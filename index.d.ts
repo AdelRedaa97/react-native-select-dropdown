@@ -114,7 +114,7 @@ declare module "react-native-select-dropdown" {
     /** 
      * text style for search input
     */
-    searchInputTxtStyle: StyleProp<TextStyle>;
+    searchInputTxtStyle?: StyleProp<TextStyle>;
     /**
     * placeholder text for search input
     */
