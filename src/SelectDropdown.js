@@ -114,13 +114,15 @@ const SelectDropdown = (
   const openDropdown = () => {
     DropdownButton.current.measure((fx, fy, w, h, px, py) => {
       // console.log('position y => ', py, '\nheight', h, '\nposition x => ', px)
+      // Y location is offset 25 pixels below the SelectDropdown on Android
+      const offset = (Platform.OS == 'android' ? 25 : 0);
       setButtonLayout({w, h, px, py});
       if (height - 18 < py + h + dropdownHEIGHT) {
         setDropdownPX(px);
         setDropdownPY(py - 2 - dropdownHEIGHT);
       } else {
         setDropdownPX(px);
-        setDropdownPY(py + h + 2);
+        setDropdownPY(py + h + 2 - offset);
       }
       setDropdownWIDTH(dropdownStyle?.width || w);
       setIsVisible(true);
