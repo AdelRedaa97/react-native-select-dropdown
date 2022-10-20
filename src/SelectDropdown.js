@@ -23,6 +23,7 @@ const SelectDropdown = (
     disableAutoScroll /* boolean */,
     onFocus /* function  */,
     onBlur /* function  */,
+    onScrollEndReached /* function  */,
     /////////////////////////////
     buttonStyle /* style object for button */,
     buttonTextStyle /* style object for button text */,
@@ -167,6 +168,8 @@ const SelectDropdown = (
               ListHeaderComponent={renderSearchView()}
               stickyHeaderIndices={search && [0]}
               keyboardShouldPersistTaps="always"
+              onEndReached={() => onScrollEndReached && onScrollEndReached()}
+              onEndReachedThreshold={0.5}
             />
           </DropdownWindow>
         </DropdownModal>

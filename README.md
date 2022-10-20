@@ -80,6 +80,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`onBlur`](#onBlur)
 
+- [`onScrollEndReached`](#onScrollEndReached)
+
 - [`buttonStyle`](#buttonStyle)
 
 - [`buttonTextStyle`](#buttonTextStyle)
@@ -127,6 +129,7 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 - [`reset`](#License)
 - [`openDropdown`](#License)
 - [`closeDropdown`](#License)
+- [`selectIndex`](#License)
 
 ---
 
@@ -233,6 +236,16 @@ function fires when dropdown is opened
 ### onBlur
 
 function fires when dropdown is closed
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### onScrollEndReached
+
+function fires when dropdown scrolls to the end (for paginations)
 
 | Type     | Required |
 | -------- | -------- |
@@ -454,11 +467,12 @@ function returns React component for search input icon
 
 ---
 
-| Method            | Description                                                                                                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `reset()`         | Remove selection & reset it to display `defaultButtonText` check https://github.com/AdelRedaa97/react-native-select-dropdown/pull/1#issuecomment-818307624. |
-| `openDropdown()`  | Open the dropdown.                                                                                                                                          |
-| `closeDropdown()` | Close the dropdown.                                                                                                                                         |
+| Method               | Description                                                                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `reset()`            | Remove selection & reset it to display `defaultButtonText` check https://github.com/AdelRedaa97/react-native-select-dropdown/pull/1#issuecomment-818307624. |
+| `openDropdown()`     | Open the dropdown.                                                                                                                                          |
+| `closeDropdown()`    | Close the dropdown.                                                                                                                                         |
+| `selectIndex(index)` | Select a specific item by index.                                                                                                                            |
 
 ---
 
