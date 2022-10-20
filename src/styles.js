@@ -1,7 +1,13 @@
-import {StyleSheet, Dimensions, I18nManager} from 'react-native';
-const {width, height} = Dimensions.get('window');
+import {StyleSheet, Dimensions} from 'react-native';
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
+  rowRevese: {
+    flexDirection: 'row-reverse',
+  },
   dropdownButton: {
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -10,10 +16,6 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 8,
     overflow: 'hidden',
-  },
-  searchViewStyle: {
-    height: 50,
-    paddingHorizontal: 0,
   },
   dropdownButtonText: {
     flex: 1,
@@ -25,21 +27,6 @@ const styles = StyleSheet.create({
   dropdownCustomizedButtonParent: {
     flex: 1,
     overflow: 'hidden',
-  },
-  //////////////////////////////////////
-  dropdownOverlay: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.4)',
-  },
-  dropdownOverlayView: {
-    backgroundColor: '#EFEFEF',
-  },
-  dropdownActivityIndicatorView: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   //////////////////////////////////////
   dropdownRow: {
@@ -61,14 +48,6 @@ const styles = StyleSheet.create({
   dropdownCustomizedRowParent: {
     flex: 1,
     overflow: 'hidden',
-  },
-  //////////////////////////////////////
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 6},
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 10,
   },
 });
 

@@ -6,6 +6,7 @@ const voidFunction = () => {};
 
 const Input = (
   {
+    searchViewWidth,
     inputStyle,
     value,
     valueColor,
@@ -47,33 +48,35 @@ const Input = (
   };
 
   return (
-    <View
-      style={{
-        ...styles.defaultInputStyle,
-        ...defaults.inputStyle,
-      }}>
-      {defaults.renderLeft && <View style={styles.pressableLeft}>{defaults.renderLeft()}</View>}
-      <TextInput
-        testID={defaults.testID}
-        ref={ref}
-        value={defaults.value}
-        placeholder={defaults.placeholder}
-        placeholderTextColor={defaults.placeholderTextColor}
-        textAlign={defaults.textAlign}
-        onChangeText={onChangeTextValidator}
-        onEndEditing={defaults.onEndEditing}
-        onSubmitEditing={defaults.onSubmitEditing}
-        //
-        style={{...styles.inputField, color: defaults.valueColor}}
-        returnKeyType={'done'}
-        textContentType={'oneTimeCode'}
-        allowFontScaling={false}
-        autoComplete={'off'}
-        autoCorrect={false}
-        autoCapitalize={'none'}
-        autoFocus={true}
-      />
-      {defaults.renderRight && <View style={styles.pressableRight}>{defaults.renderRight()}</View>}
+    <View style={{...styles.searchViewStyle, ...{width: searchViewWidth}}}>
+      <View
+        style={{
+          ...styles.defaultInputStyle,
+          ...defaults.inputStyle,
+        }}>
+        {defaults.renderLeft && <View style={styles.pressableLeft}>{defaults.renderLeft()}</View>}
+        <TextInput
+          testID={defaults.testID}
+          ref={ref}
+          value={defaults.value}
+          placeholder={defaults.placeholder}
+          placeholderTextColor={defaults.placeholderTextColor}
+          textAlign={defaults.textAlign}
+          onChangeText={onChangeTextValidator}
+          onEndEditing={defaults.onEndEditing}
+          onSubmitEditing={defaults.onSubmitEditing}
+          //
+          style={{...styles.inputField, color: defaults.valueColor}}
+          returnKeyType={'done'}
+          textContentType={'oneTimeCode'}
+          allowFontScaling={false}
+          autoComplete={'off'}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+          autoFocus={true}
+        />
+        {defaults.renderRight && <View style={styles.pressableRight}>{defaults.renderRight()}</View>}
+      </View>
     </View>
   );
 };
@@ -81,6 +84,10 @@ const Input = (
 export default forwardRef((props, ref) => Input(props, ref));
 
 const styles = StyleSheet.create({
+  searchViewStyle: {
+    height: 50,
+    paddingHorizontal: 0,
+  },
   defaultInputStyle: {
     width: '100%',
     height: '100%',
