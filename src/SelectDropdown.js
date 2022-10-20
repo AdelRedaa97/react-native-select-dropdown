@@ -79,8 +79,11 @@ const SelectDropdown = (
     closeDropdown: () => {
       closeDropdown();
     },
+    selectIndex: index => {
+      selectItem(index);
+    },
   }));
-  /* ******************* state ******************* */
+  /* ******************* Methods ******************* */
   const openDropdown = () => {
     dropdownButtonRef.current.measure((fx, fy, w, h, px, py) => {
       onDropdownButtonLayout(w, h, px, py);
@@ -109,7 +112,6 @@ const SelectDropdown = (
     onSelect && onSelect(item, index);
     selectItem(index);
   };
-  ///////////////////////////////////////////////////////
   /* ******************** Render Methods ******************** */
   const renderSearchView = () => {
     return (
