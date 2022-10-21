@@ -124,6 +124,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`renderSearchInputRightIcon`](#renderSearchInputRightIcon)
 
+- [`onChangeSearchInputText`](#onChangeSearchInputText)
+
 ### Methods
 
 - [`reset`](#License)
@@ -460,6 +462,16 @@ function returns React component for search input icon
 ### renderSearchInputRightIcon
 
 function returns React component for search input icon
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### onChangeSearchInputText
+
+function callback when the search input text changes, this will automatically disable the dropdown's internal search to be implemented manually outside the component
 
 | Type     | Required |
 | -------- | -------- |

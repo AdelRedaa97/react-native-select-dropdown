@@ -48,9 +48,11 @@ const SelectDropdown = (
     searchPlaceHolderColor /* text color for search input placeholder */,
     renderSearchInputLeftIcon /* function returns React component for search input icon */,
     renderSearchInputRightIcon /* function returns React component for search input icon */,
+    onChangeSearchInputText /* function callback when the search input text changes, this will automatically disable the dropdown's interna search to be implemented manually outside the component  */,
   },
   ref,
 ) => {
+  const disabledInternalSearch = !!onChangeSearchInputText;
   /* ******************* hooks ******************* */
   const {dropdownButtonRef, dropDownFlatlistRef} = useRefs();
   const {
@@ -61,7 +63,7 @@ const SelectDropdown = (
     reset,
     searchTxt,
     setSearchTxt,
-  } = useSelectDropdown(data, defaultValueByIndex, defaultValue);
+  } = useSelectDropdown(data, defaultValueByIndex, defaultValue, disabledInternalSearch);
   const {
     isVisible, //
     setIsVisible,
@@ -123,7 +125,10 @@ const SelectDropdown = (
           valueColor={searchInputTxtColor}
           placeholder={searchPlaceHolder}
           placeholderTextColor={searchPlaceHolderColor}
-          onChangeText={setSearchTxt}
+          onChangeText={txt => {
+            setSearchTxt(txt);
+            disabledInternalSearch && onChangeSearchInputText(txt);
+          }}
           inputStyle={searchInputStyle}
           renderLeft={renderSearchInputLeftIcon}
           renderRight={renderSearchInputRightIcon}
