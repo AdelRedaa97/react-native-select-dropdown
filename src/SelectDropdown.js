@@ -138,7 +138,7 @@ const SelectDropdown = (
   };
   const renderFlatlistItem = ({item, index}) => {
     return (
-      item && (
+      isExist(item) && (
         <TouchableOpacity
           activeOpacity={0.8}
           style={{...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle)}}
