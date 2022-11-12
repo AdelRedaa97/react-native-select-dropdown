@@ -1,25 +1,19 @@
-const contains = (query, item) => {
-  if (item) {
-    // string, number or boolean
-    if (typeof item != 'object') {
-      const str = item.toString().toLowerCase();
-      if (str.includes(query.toString().toLowerCase())) {
+const contains = (item, searchTxt) => {
+  // item is an object
+  if (typeof item == 'object' && item != null) {
+    for (let key in item) {
+      const value = item[key];
+      if (contains(value, searchTxt)) {
         return true;
       }
-    } else {
-      // item is an object
-      for (let key in item) {
-        if (item[key]) {
-          if (typeof item[key] == 'object') {
-            return contains(query, item[key]);
-          } else {
-            const str = item[key].toString().toLowerCase();
-            if (str.includes(query.toString().toLowerCase())) {
-              return true;
-            }
-          }
-        }
-      }
+    }
+  }
+  // string, number or boolean
+  if (typeof item != 'object' && item != null && item != undefined) {
+    const itemStringfied = item.toString().toLowerCase();
+    const searchTxtStringfied = searchTxt.toString().toLowerCase();
+    if (itemStringfied.includes(searchTxtStringfied)) {
+      return true;
     }
   }
   return false;
@@ -28,7 +22,7 @@ const contains = (query, item) => {
 export const deepSearchInArr = (query, arr) => {
   let array = [];
   for (let i = 0; i <= arr.length - 1; i++) {
-    if (contains(query, arr[i])) {
+    if (contains(arr[i], query)) {
       array.push(arr[i]);
     } else {
       array.push(null);
