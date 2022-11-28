@@ -40,6 +40,10 @@ declare module "react-native-select-dropdown" {
      */
     disableAutoScroll?: boolean;
     /**
+     * disable click all Rows index in the list
+     */
+     disabledIndexs?: number[];
+    /**
       * function fires when dropdown is opened
       */
     onFocus?: () => void;

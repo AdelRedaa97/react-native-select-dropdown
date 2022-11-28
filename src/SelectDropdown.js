@@ -21,6 +21,7 @@ const SelectDropdown = (
     defaultValueByIndex /* integer */,
     disabled /* boolean */,
     disableAutoScroll /* boolean */,
+    disabledIndexs /* array of disabled Row index */,
     onFocus /* function  */,
     onBlur /* function  */,
     onScrollEndReached /* function  */,
@@ -141,6 +142,7 @@ const SelectDropdown = (
     return (
       isExist(item) && (
         <TouchableOpacity
+          disabled={disabledIndexs?.includes(index)}
           activeOpacity={0.8}
           style={{...styles.dropdownRow, ...rowStyle, ...(isSelected && selectedRowStyle)}}
           onPress={() => onSelectItem(item, index)}>
