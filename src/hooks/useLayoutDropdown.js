@@ -44,14 +44,16 @@ export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
         ? remainigHeightAvoidKeyboard - safeDropdownViewUnderKeyboard
         : dropdownPY;
     return {
+      ...{
+        borderTopWidth: 0,
+        overflow: 'hidden',
+      },
       ...dropdownStyle,
       ...{
         position: 'absolute',
         top: top,
         height: dropdownHEIGHT,
         width: dropdownWIDTH,
-        borderTopWidth: 0,
-        overflow: 'hidden',
       },
       ...(I18nManager.isRTL ? {right: dropdownStyle?.right || dropdownPX} : {left: dropdownStyle?.left || dropdownPX}),
     };
