@@ -144,7 +144,7 @@ const SelectDropdown = (
           style={{...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle)}}
           onPress={() => onSelectItem(item, index)}>
           {renderCustomizedRowChild ? (
-            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index)}</View>
+            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index, index == selectedIndex)}</View>
           ) : (
             <Text
               numberOfLines={1}
