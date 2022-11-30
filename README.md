@@ -1,6 +1,6 @@
 # react-native-select-dropdown
 
-react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.
+react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for android and iOS platforms.
 
 ## Installation
 
@@ -75,6 +75,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 - [`disabled`](#disabled)
 
 - [`disableAutoScroll`](#disableAutoScroll)
+
+- [`disabledIndexs`](#disabledIndexs)
 
 - [`onFocus`](#onFocus)
 
@@ -222,6 +224,16 @@ disable auto scroll to selected value
 | Type    | Required |
 | ------- | -------- |
 | boolean | No       |
+
+---
+
+### disabledIndexs
+
+disable choose all Rows index in the list
+
+| Type  | Required |
+| ----- | -------- |
+| array | No       |
 
 ---
 

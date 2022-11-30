@@ -1,6 +1,6 @@
 {
   "name": "react-native-select-dropdown",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "react-native-select-dropdown is a highly customized dropdown | select | picker | menu for react native that works for andriod and iOS platforms.",
   "main": "index.js",
   "typings": "index.d.ts",
