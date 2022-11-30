@@ -21,6 +21,7 @@ const SelectDropdown = (
     defaultValueByIndex /* integer */,
     disabled /* boolean */,
     disableAutoScroll /* boolean */,
+    disabledIndexs /* array of disabled Row index */,
     onFocus /* function  */,
     onBlur /* function  */,
     onScrollEndReached /* function  */,
@@ -137,19 +138,21 @@ const SelectDropdown = (
     );
   };
   const renderFlatlistItem = ({item, index}) => {
+    const isSelected = index == selectedIndex;
     return (
       isExist(item) && (
         <TouchableOpacity
+          disabled={disabledIndexs?.includes(index)}
           activeOpacity={0.8}
-          style={{...styles.dropdownRow, ...rowStyle, ...(index == selectedIndex && selectedRowStyle)}}
+          style={{...styles.dropdownRow, ...rowStyle, ...(isSelected && selectedRowStyle)}}
           onPress={() => onSelectItem(item, index)}>
           {renderCustomizedRowChild ? (
-            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index)}</View>
+            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index, isSelected)}</View>
           ) : (
             <Text
               numberOfLines={1}
               allowFontScaling={false}
-              style={{...styles.dropdownRowText, ...rowTextStyle, ...(index == selectedIndex && selectedRowTextStyle)}}>
+              style={{...styles.dropdownRowText, ...rowTextStyle, ...(isSelected && selectedRowTextStyle)}}>
               {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
             </Text>
           )}

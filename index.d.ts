@@ -40,6 +40,10 @@ declare module "react-native-select-dropdown" {
      */
     disableAutoScroll?: boolean;
     /**
+     * disable click all Rows index in the list
+     */
+     disabledIndexs?: number[];
+    /**
       * function fires when dropdown is opened
       */
     onFocus?: () => void;
@@ -98,7 +102,7 @@ declare module "react-native-select-dropdown" {
     /**
      * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
      */
-    renderCustomizedRowChild?: (selectedItem: any, index: number) => React.ReactNode;
+    renderCustomizedRowChild?: (selectedItem: any, index: number, isSelected?: boolean) => React.ReactNode;
     /**
      * enable search functionality
      */
