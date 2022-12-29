@@ -8,6 +8,7 @@ const Input = (
   {
     searchViewWidth,
     inputStyle,
+    inputTextStyle,
     value,
     valueColor,
     placeholder,
@@ -24,6 +25,7 @@ const Input = (
 ) => {
   const defaults = {
     inputStyle: inputStyle,
+    inputTextStyle: inputTextStyle,
     value: value ?? '',
     valueColor: valueColor ?? '#000000',
     placeholder: placeholder ?? '',
@@ -66,7 +68,7 @@ const Input = (
           onEndEditing={defaults.onEndEditing}
           onSubmitEditing={defaults.onSubmitEditing}
           //
-          style={{...styles.inputField, color: defaults.valueColor}}
+          style={{...styles.inputField, color: defaults.valueColor, ...defaults.inputTextStyle}}
           returnKeyType={'done'}
           textContentType={'oneTimeCode'}
           allowFontScaling={false}
