@@ -68,7 +68,7 @@ declare module "react-native-select-dropdown" {
      */
     dropdownStyle?: StyleProp<ViewStyle>;
     /**
-     * backdrop color when dropdown is opened 
+     * backdrop color when dropdown is opened
      */
     dropdownOverlayColor?: string;
     /**
@@ -99,7 +99,7 @@ declare module "react-native-select-dropdown" {
      * text color for search input
      */
     searchInputTxtColor?: string;
-    /** 
+    /**
      * text style for search input
     */
     searchInputTxtStyle?: StyleProp<TextStyle>;
@@ -114,7 +114,7 @@ declare module "react-native-select-dropdown" {
     /**
     * function callback when the search input text changes, this will automatically disable the dropdown's internal search to be implemented manually outside the component
     */
-    onChangeSearchInputText: (searchText: string) => void;
+    onChangeSearchInputText?: (searchText: string) => void;
     /**
      * function returns React component for search input icon
      */
