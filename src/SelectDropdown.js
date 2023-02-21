@@ -2,6 +2,7 @@ import React, {forwardRef, useImperativeHandle} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import {isExist} from './helpers/isExist';
+import {mergeStyles} from './helpers/mergeStyles';
 import Input from './components/Input';
 import DropdownOverlay from './components/DropdownOverlay';
 import DropdownModal from './components/DropdownModal';
@@ -193,11 +194,11 @@ const SelectDropdown = (
       ref={dropdownButtonRef}
       disabled={disabled}
       onPress={openDropdown}
-      style={{
-        ...styles.dropdownButton,
-        ...(dropdownIconPosition == 'left' ? styles.row : styles.rowRevese),
-        ...buttonStyle,
-      }}>
+      style={mergeStyles(
+        styles.dropdownButton,
+        dropdownIconPosition == 'left' ? styles.row : styles.rowRevese,
+        buttonStyle,
+      )}>
       {renderDropdown()}
       {renderDropdownIcon && renderDropdownIcon(isVisible)}
       {renderCustomizedButtonChild ? (
