@@ -49,6 +49,16 @@ const styles = StyleSheet.create({
     flex: 1,
     overflow: 'hidden',
   },
+  allowAllStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 9999,
+    height: 50,
+  },
 });
 
 export default styles;

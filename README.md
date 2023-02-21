@@ -31,6 +31,10 @@ yarn add react-native-select-dropdown
 	<img src="https://i.postimg.cc/GmYnZVF0/Simulator-Screen-Recording-i-Phone-12-Pro-2022-05-31-at-13-58-28.gif" width="300" height="650">
 </p>
 
+## Optimization
+
+Install `yarn add @shopify/flash-list` then use `<FlashSelectDropdown />` instead of `<SelectDropdown />` for optimised benifits.
+
 ## Usage
 
 ```
@@ -54,6 +58,49 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 		return item
 	}}
 />
+```
+
+#### Multiple Select
+
+```
+const [data,setData]=useState()
+
+<SelectDropdown
+  multipleSelect
+  search
+  allowSelectAll
+  searchPlaceHolder="Search Data"
+  searchKey={["title"]}
+  statusBarTranslucent={true}
+  //defaultValue={defaulyValue}
+  defaultValueByIndex={[1, 4, 5]}
+  data={[{key:"demo",title:"This is your title 1"},{key:"demo2",title:"This is your title 2"}]}
+  buttonStyle={{
+    backgroundColor: "#cbd5e1",
+    width: "100%",
+  }}
+  buttonTextStyle={{ fontSize: 14, textAlign: "left" }}
+  dropdownStyle={{ marginTop: 0 }}
+  selectedRowStyle={{ backgroundColor: "#e2e8f0" }}
+  selectedRowTextStyle={{ fontWeight: "bold" }}
+  rowTextStyle={{ fontSize: 14 }}
+  defaultButtonText={"Select Here"}
+  renderDropdownIcon={() => {
+    return (
+      <View>
+        <AntDesign name="down" size={10} color="black" />
+      </View>
+    );
+  }}
+  onSelect={async (selectedItem) => {
+    setData(selectedItem);
+  }}
+  buttonTextAfterSelection={"Selected"}
+  rowTextForSelection={(item, index) => {
+    return item.title;
+  }}
+/>;
+
 ```
 
 ### Props
@@ -128,6 +175,18 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`onChangeSearchInputText`](#onChangeSearchInputText)
 
+- [`onlyDropdownIcon`](#onlyDropdownIcon)
+
+- [`textNumberOfLines`](#textNumberOfLines)
+
+- [`multipleSelect`](#multipleSelect)
+
+- [`searchKey`](#searchKey)
+
+- [`emptyStyle`](#emptyStyle)
+
+- [`allowSelectAll`](#allowSelectAll)
+
 ### Methods
 
 - [`reset`](#License)
@@ -151,6 +210,8 @@ array of data that will be represented in dropdown 'can be array of objects
 
 function recieves selected item and its index in data array
 
+if multipleSelect is true then recives only array of item.
+
 | Type     | Required |
 | -------- | -------- |
 | function | Yes      |
@@ -171,9 +232,11 @@ default button text when no item is selected
 
 function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
 
-| Type     | Required                                                             |
-| -------- | -------------------------------------------------------------------- |
-| function | Yes "unless you customized button using renderCustomizedButtonChild" |
+if multiple select is true then pass the string value
+
+| Type               | Required                                                             |
+| ------------------ | -------------------------------------------------------------------- |
+| function or string | Yes "unless you customized button using renderCustomizedButtonChild" |
 
 ---
 
@@ -189,7 +252,7 @@ function recieves item and index for each row in dropdown, this function shoud r
 
 ### defaultValue
 
-default selected item in dropdown ( check examples in Demo1)
+default selected item in dropdown ( check examples in Demo1). If multiple select is true then pass the array of selected items.
 
 | Type | Required |
 | ---- | -------- |
@@ -199,11 +262,11 @@ default selected item in dropdown ( check examples in Demo1)
 
 ### defaultValueByIndex
 
-default selected item index
+default selected item index. If multipleSelect is true then pass the array of default indices (check Demo2).
 
-| Type    | Required |
-| ------- | -------- |
-| integer | No       |
+| Type             | Required |
+| ---------------- | -------- |
+| integer or array | No       |
 
 ---
 
@@ -399,6 +462,16 @@ style object for selected row text
 
 ---
 
+### emptyStyle
+
+style object for empty list
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
 ### renderCustomizedRowChild
 
 function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
@@ -478,6 +551,46 @@ function returns React component for search input icon
 | Type     | Required |
 | -------- | -------- |
 | function | No       |
+
+---
+
+### textNumberOfLines
+
+Drop Down Button Text number of lines (numberOfLines prop for Text)
+
+| Type   | Required | default |
+| ------ | -------- | ------- |
+| number | No       | 1       |
+
+---
+
+### multipleSelect
+
+Select Multiple values from the Drop down List
+
+| Type    | Required | default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
+
+---
+
+### searchKey
+
+Searches only the specified keys if the data is object (by default searches all keys)
+
+| Type  | Required |
+| ----- | -------- |
+| array | No       |
+
+---
+
+### allowSelectAll
+
+Allows user to select all data (works only if multiple select is true)
+
+| Type    | Required | default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
 
 ---
 
