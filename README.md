@@ -92,7 +92,7 @@ const [data,setData]=useState()
       </View>
     );
   }}
-  onSelect={async (selectedItem) => {
+  onSelect={async (selectedItem,index) => {
     setData(selectedItem);
   }}
   buttonTextAfterSelection={"Selected"}
@@ -210,7 +210,7 @@ array of data that will be represented in dropdown 'can be array of objects
 
 function recieves selected item and its index in data array
 
-if multipleSelect is true then recives only array of item.
+if multipleSelect is true then recives array of items and arrat if selected index.
 
 | Type     | Required |
 | -------- | -------- |

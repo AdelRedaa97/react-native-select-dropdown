@@ -108,7 +108,11 @@ const FlashSelectDropdown = (
   };
   const closeDropdown = () => {
     if (multipleSelect) {
-      onSelect && onSelect(selectedItem.map(d => d.item));
+      onSelect &&
+        onSelect(
+          selectedItem.map(d => d.item),
+          selectedIndex,
+        );
     }
     setIsVisible(false);
     setSearchTxt('');
