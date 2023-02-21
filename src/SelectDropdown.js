@@ -147,7 +147,7 @@ const SelectDropdown = (
         <TouchableOpacity
           disabled={disabledIndexs?.includes(index)}
           activeOpacity={0.8}
-          style={{...styles.dropdownRow, ...rowStyle, ...(isSelected && selectedRowStyle)}}
+          style={mergeStyles(styles.dropdownRow, rowStyle, isSelected && selectedRowStyle)}
           onPress={() => onSelectItem(item, index)}>
           {renderCustomizedRowChild ? (
             <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index, isSelected)}</View>
@@ -155,7 +155,7 @@ const SelectDropdown = (
             <Text
               numberOfLines={1}
               allowFontScaling={false}
-              style={{...styles.dropdownRowText, ...rowTextStyle, ...(isSelected && selectedRowTextStyle)}}>
+              style={mergeStyles(styles.dropdownRowText, rowTextStyle, isSelected && selectedRowTextStyle)}>
               {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
             </Text>
           )}
@@ -206,7 +206,10 @@ const SelectDropdown = (
           {renderCustomizedButtonChild(selectedItem, selectedIndex)}
         </View>
       ) : (
-        <Text numberOfLines={1} allowFontScaling={false} style={{...styles.dropdownButtonText, ...buttonTextStyle}}>
+        <Text
+          numberOfLines={1}
+          allowFontScaling={false}
+          style={mergeStyles(styles.dropdownButtonText, buttonTextStyle)}>
           {isExist(selectedItem)
             ? buttonTextAfterSelection
               ? buttonTextAfterSelection(selectedItem, selectedIndex)
