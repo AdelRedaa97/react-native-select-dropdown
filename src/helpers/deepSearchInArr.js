@@ -1,10 +1,24 @@
-const contains = (item, searchTxt) => {
+const decycle = (obj, stack = []) => {
+  if (!obj || typeof obj !== 'object') return obj;
+  if (stack.includes(obj)) return null;
+  if (obj._raw) {
+    return obj._raw;
+  }
+  let s = stack.concat([obj]);
+
+  return Array.isArray(obj)
+    ? obj.map(x => decycle(x, s))
+    : Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, decycle(v, s)]));
+};
+const contains = (item, searchTxt, searchKey) => {
   // item is an object
   if (typeof item == 'object' && item != null) {
     for (let key in item) {
-      const value = item[key];
-      if (contains(value, searchTxt)) {
-        return true;
+      if (searchKey ? searchKey.includes(key) : true) {
+        const value = item[key];
+        if (contains(value, searchTxt)) {
+          return true;
+        }
       }
     }
   }
@@ -19,10 +33,10 @@ const contains = (item, searchTxt) => {
   return false;
 };
 
-export const deepSearchInArr = (query, arr) => {
+export const deepSearchInArr = (query, arr, searchKey) => {
   let array = [];
   for (let i = 0; i <= arr.length - 1; i++) {
-    if (contains(arr[i], query)) {
+    if (contains(arr[i], query, searchKey)) {
       array.push(arr[i]);
     } else {
       array.push(null);

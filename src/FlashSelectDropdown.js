@@ -9,8 +9,9 @@ import DropdownWindow from './components/DropdownWindow';
 import {useSelectDropdown} from './hooks/useSelectDropdown';
 import {useLayoutDropdown} from './hooks/useLayoutDropdown';
 import {useRefs} from './hooks/useRefs';
+import {FlashList} from '@shopify/flash-list';
 
-const SelectDropdown = (
+const FlashSelectDropdown = (
   {
     data /* array */,
     onSelect /* function  */,
@@ -219,7 +220,7 @@ const SelectDropdown = (
                 {renderSearchView()}
               </View>
             )}
-            <FlatList
+            <FlashList
               data={dataArr}
               estimatedItemSize={50}
               extraData={selectedIndex}
@@ -283,4 +284,4 @@ const SelectDropdown = (
   );
 };
 
-export default forwardRef((props, ref) => SelectDropdown(props, ref));
+export default forwardRef((props, ref) => FlashSelectDropdown(props, ref));
