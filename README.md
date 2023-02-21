@@ -262,7 +262,7 @@ default selected item in dropdown ( check examples in Demo1). If multiple select
 
 ### defaultValueByIndex
 
-default selected item index. If multipleSelect is true then pass the array of default indices (check Demo2).
+default selected item index. If multipleSelect is true then pass the array of default indices.
 
 | Type             | Required |
 | ---------------- | -------- |
