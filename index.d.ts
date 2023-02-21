@@ -68,7 +68,7 @@ declare module "react-native-select-dropdown" {
      */
     dropdownStyle?: StyleProp<ViewStyle>;
     /**
-     * backdrop color when dropdown is opened 
+     * backdrop color when dropdown is opened
      */
     dropdownOverlayColor?: string;
     /**
@@ -99,7 +99,7 @@ declare module "react-native-select-dropdown" {
      * text color for search input
      */
     searchInputTxtColor?: string;
-    /** 
+    /**
      * text style for search input
     */
     searchInputTxtStyle?: StyleProp<TextStyle>;
