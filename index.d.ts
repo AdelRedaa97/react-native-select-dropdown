@@ -1,15 +1,15 @@
-import type * as React from "react";
-import { StyleProp, ViewStyle, TextStyle } from "react-native";
+import type * as React from 'react';
+import {StyleProp, ViewStyle, TextStyle} from 'react-native';
 
-declare module "react-native-select-dropdown" {
+declare module 'react-native-select-dropdown' {
   export type SelectDropdownProps = {
     /**
-      * array of data that will be represented in dropdown, can be array of objects
-      */
+     * array of data that will be represented in dropdown, can be array of objects
+     */
     data: Array<any>;
     /**
      * function recieves selected item and its index in data array
-      */
+     */
     onSelect: (selectedItem: any, index: number) => void;
     /**
      * default button text when no item is selected
@@ -34,14 +34,14 @@ declare module "react-native-select-dropdown" {
     /**
      * disable click all Rows index in the list
      */
-     disabledIndexs?: number[];
+    disabledIndexs?: number[];
     /**
-      * function fires when dropdown is opened
-      */
+     * function fires when dropdown is opened
+     */
     onFocus?: () => void;
     /**
-      * function fires when dropdown is closed
-      */
+     * function fires when dropdown is closed
+     */
     onBlur?: () => void;
     /**
      * style object for button
@@ -58,7 +58,7 @@ declare module "react-native-select-dropdown" {
     /**
      * dropdown icon position "left" || "right"
      */
-    dropdownIconPosition?: "left" | "right";
+    dropdownIconPosition?: 'left' | 'right';
     /**
      * required to set true when statusbar is translucent (android only)
      */
@@ -68,9 +68,13 @@ declare module "react-native-select-dropdown" {
      */
     dropdownStyle?: StyleProp<ViewStyle>;
     /**
-     * backdrop color when dropdown is opened
+     * When true, shows a vertical scroll indicator in the dropdown.
      */
     dropdownOverlayColor?: string;
+    /**
+     * backdrop color when dropdown is opened
+     */
+    showsVerticalScrollIndicator?: boolean;
     /**
      * style object for row
      */
@@ -101,53 +105,56 @@ declare module "react-native-select-dropdown" {
     searchInputTxtColor?: string;
     /**
      * text style for search input
-    */
+     */
     searchInputTxtStyle?: StyleProp<TextStyle>;
     /**
-    * placeholder text for search input
-    */
+     * placeholder text for search input
+     */
     searchPlaceHolder?: string;
     /**
-    * text color for search input placeholder
-    */
+     * text color for search input placeholder
+     */
     searchPlaceHolderColor?: string;
     /**
-    * function callback when the search input text changes, this will automatically disable the dropdown's internal search to be implemented manually outside the component
-    */
+     * function callback when the search input text changes, this will automatically disable the dropdown's internal search to be implemented manually outside the component
+     */
     onChangeSearchInputText?: (searchText: string) => void;
     /**
      * function returns React component for search input icon
      */
     renderSearchInputLeftIcon?: (selectedItem: any, index: number) => React.ReactNode;
     /**
-    * function returns React component for search input icon
-    */
+     * function returns React component for search input icon
+     */
     renderSearchInputRightIcon?: (selectedItem: any, index: number) => React.ReactNode;
   } & (
-    {
-      /**
-       * function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
-       */
-      buttonTextAfterSelection: (selectedItem: any, index: number) => string;
-    } | {
-      /**
-       * function recieves selected item and its index, this function should return a React component as a child for dropdown button buttonStyle should be used for parent button view style.
-       */
-      renderCustomizedButtonChild?: (selectedItem: any, index: number) => React.ReactNode;
-    }
-  ) & (
-    {
-      /**
-       * function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
-       */
-      rowTextForSelection: (item: any, index: number) => string;
-    } | {
-      /**
-       * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
-       */
-      renderCustomizedRowChild?: (selectedItem: any, index: number, isSelected?: boolean) => React.ReactNode;
-    }
-  );
+    | {
+        /**
+         * function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
+         */
+        buttonTextAfterSelection: (selectedItem: any, index: number) => string;
+      }
+    | {
+        /**
+         * function recieves selected item and its index, this function should return a React component as a child for dropdown button buttonStyle should be used for parent button view style.
+         */
+        renderCustomizedButtonChild?: (selectedItem: any, index: number) => React.ReactNode;
+      }
+  ) &
+    (
+      | {
+          /**
+           * function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
+           */
+          rowTextForSelection: (item: any, index: number) => string;
+        }
+      | {
+          /**
+           * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
+           */
+          renderCustomizedRowChild?: (selectedItem: any, index: number, isSelected?: boolean) => React.ReactNode;
+        }
+    );
 
   export default class SelectDropdown extends React.Component<SelectDropdownProps> {
     /**

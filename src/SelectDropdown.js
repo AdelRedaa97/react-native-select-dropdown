@@ -36,6 +36,7 @@ const SelectDropdown = (
     statusBarTranslucent,
     dropdownStyle,
     dropdownOverlayColor /* string */,
+    showsVerticalScrollIndicator,
     /////////////////////////////
     rowStyle /* style object for row */,
     rowTextStyle /* style object for row text */,
@@ -181,6 +182,7 @@ const SelectDropdown = (
               keyboardShouldPersistTaps="always"
               onEndReached={() => onScrollEndReached && onScrollEndReached()}
               onEndReachedThreshold={0.5}
+              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
           </DropdownWindow>
         </DropdownModal>
