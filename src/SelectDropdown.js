@@ -75,6 +75,7 @@ const SelectDropdown = (
     onDropdownButtonLayout,
     getItemLayout,
     dropdownWindowStyle,
+    onRequestClose,
   } = useLayoutDropdown(data, dropdownStyle, rowStyle, search);
   useImperativeHandle(ref, () => ({
     reset: () => {
@@ -167,7 +168,7 @@ const SelectDropdown = (
   const renderDropdown = () => {
     return (
       isVisible && (
-        <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible}>
+        <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible} onRequestClose={onRequestClose}>
           <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
           <DropdownWindow layoutStyle={dropdownWindowStyle}>
             <FlatList

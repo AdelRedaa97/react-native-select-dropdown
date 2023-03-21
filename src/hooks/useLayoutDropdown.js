@@ -59,6 +59,10 @@ export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
     };
   }, [dropdownStyle, remainigHeightAvoidKeyboard, dropdownPX, dropdownPY, dropdownHEIGHT, dropdownWIDTH]);
 
+  const onRequestClose = () => {
+    setIsVisible(false);
+  };
+
   return {
     isVisible,
     setIsVisible,
@@ -66,5 +70,6 @@ export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
     onDropdownButtonLayout,
     getItemLayout,
     dropdownWindowStyle,
+    onRequestClose,
   };
 };
