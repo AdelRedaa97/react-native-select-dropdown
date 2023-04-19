@@ -14,7 +14,8 @@ export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
   }); // dropdown height
   const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
   const remainigHeightAvoidKeyboard = useKeyboardRemainingScreenHeight();
-  const safeDropdownViewUnderKeyboard = rowStyle && rowStyle.height ? rowStyle.height * 3 : 50 * 3;
+  const safeDropdownViewUnderKeyboard = rowStyle && rowStyle.height ? rowStyle.height * 3 :
+    rowStyle && rowStyle.minHeight ? rowStyle.minHeight * 3 : 50 * 3;
 
   useEffect(() => {
     setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search));
