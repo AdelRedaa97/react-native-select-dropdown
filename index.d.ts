@@ -44,6 +44,10 @@ declare module 'react-native-select-dropdown' {
      */
     onBlur?: () => void;
     /**
+     * function fires when dropdown reaches the end
+     */
+    onScrollEndReached?: () => void;
+    /**
      * style object for button
      */
     buttonStyle?: StyleProp<ViewStyle>;

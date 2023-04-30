@@ -100,7 +100,7 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`dropdownOverlayColor`](#dropdownOverlayColor)
 
-- [`dropdownBackgroundColor`](#dropdownBackgroundColor)
+- [`showsVerticalScrollIndicator`](#showsVerticalScrollIndicator)
 
 - [`rowStyle`](#rowStyle)
 
@@ -117,6 +117,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 - [`searchInputStyle`](#searchInputStyle)
 
 - [`searchInputTxtColor`](#searchInputTxtColor)
+
+- [`searchInputTxtStyle`](#searchInputTxtStyle)
 
 - [`searchPlaceHolder`](#searchPlaceHolder)
 
@@ -349,13 +351,13 @@ backdrop color when dropdown is opened
 
 ---
 
-### dropdownBackgroundColor
+### showsVerticalScrollIndicator
 
-background color behind list items when dropdown is opened
+When true, shows a vertical scroll indicator.
 
-| Type   | Required |
-| ------ | -------- |
-| string | No       |
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
 
 ---
 
@@ -427,7 +429,7 @@ style object for search input
 
 | Type   | Required |
 | ------ | -------- |
-| object | Yes      |
+| object | No       |
 
 ---
 
@@ -438,6 +440,16 @@ text color for search input
 | Type   | Required |
 | ------ | -------- |
 | string | No       |
+
+---
+
+### searchInputTxtStyle
+
+style object for search input text
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
 
 ---
 
