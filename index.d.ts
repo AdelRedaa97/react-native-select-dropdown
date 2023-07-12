@@ -160,7 +160,7 @@ declare module 'react-native-select-dropdown' {
         }
     );
 
-  export default class SelectDropdown extends React.Component<SelectDropdownProps> {
+  export default class SelectDropdown<T> extends React.Component<SelectDropdownProps<T>> {
     /**
      * Remove selection & reset it to display defaultButtonText check
      */
