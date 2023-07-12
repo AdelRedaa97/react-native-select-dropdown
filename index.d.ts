@@ -2,15 +2,15 @@ import type * as React from 'react';
 import {StyleProp, ViewStyle, TextStyle} from 'react-native';
 
 declare module 'react-native-select-dropdown' {
-  export type SelectDropdownProps = {
+  export type SelectDropdownProps<T> = {
     /**
      * array of data that will be represented in dropdown, can be array of objects
      */
-    data: Array<any>;
+    data: Array<T>;
     /**
      * function recieves selected item and its index in data array
      */
-    onSelect: (selectedItem: any, index: number) => void;
+    onSelect: (selectedItem: T, index: number) => void;
     /**
      * default button text when no item is selected
      */
@@ -18,7 +18,7 @@ declare module 'react-native-select-dropdown' {
     /**
      * default selected item in dropdown
      */
-    defaultValue?: any;
+    defaultValue?: T;
     /**
      * default selected item index
      */
@@ -58,7 +58,7 @@ declare module 'react-native-select-dropdown' {
     /**
      * function that should return a React component for dropdown icon
      */
-    renderDropdownIcon?: (selectedItem: any, index: number) => React.ReactNode;
+    renderDropdownIcon?: (selectedItem: T, index: number) => React.ReactNode;
     /**
      * dropdown icon position "left" || "right"
      */
@@ -126,23 +126,23 @@ declare module 'react-native-select-dropdown' {
     /**
      * function returns React component for search input icon
      */
-    renderSearchInputLeftIcon?: (selectedItem: any, index: number) => React.ReactNode;
+    renderSearchInputLeftIcon?: (selectedItem: T, index: number) => React.ReactNode;
     /**
      * function returns React component for search input icon
      */
-    renderSearchInputRightIcon?: (selectedItem: any, index: number) => React.ReactNode;
+    renderSearchInputRightIcon?: (selectedItem: T, index: number) => React.ReactNode;
   } & (
     | {
         /**
          * function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
          */
-        buttonTextAfterSelection: (selectedItem: any, index: number) => string;
+        buttonTextAfterSelection: (selectedItem: T, index: number) => string;
       }
     | {
         /**
          * function recieves selected item and its index, this function should return a React component as a child for dropdown button buttonStyle should be used for parent button view style.
          */
-        renderCustomizedButtonChild?: (selectedItem: any, index: number) => React.ReactNode;
+        renderCustomizedButtonChild?: (selectedItem: T, index: number) => React.ReactNode;
       }
   ) &
     (
@@ -150,13 +150,13 @@ declare module 'react-native-select-dropdown' {
           /**
            * function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
            */
-          rowTextForSelection: (item: any, index: number) => string;
+          rowTextForSelection: (item: T, index: number) => string;
         }
       | {
           /**
            * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
            */
-          renderCustomizedRowChild?: (selectedItem: any, index: number, isSelected?: boolean) => React.ReactNode;
+          renderCustomizedRowChild?: (selectedItem: T, index: number, isSelected?: boolean) => React.ReactNode;
         }
     );
 
