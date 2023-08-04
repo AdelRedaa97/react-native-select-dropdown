@@ -20,15 +20,11 @@ const contains = (item, searchTxt) => {
 };
 
 export const deepSearchInArr = (query, arr) => {
-  let array = [];
-  for (let i = 0; i <= arr.length - 1; i++) {
-    if (contains(arr[i], query)) {
-      array.push(arr[i]);
-    } else {
-      array.push(null);
-    }
-    if (i == arr.length - 1) {
-      return array;
-    }
+  // handle edge cases
+  if (!arr || !query) {
+    return [];
   }
+
+  // use filter to get elements that pass the contains test
+  return arr.filter(item => contains(item, query));
 };
