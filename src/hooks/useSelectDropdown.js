@@ -13,7 +13,7 @@ export const useSelectDropdown = (data, defaultValueByIndex, defaultValue, disab
     if (!data || data.length == 0) {
       reset();
     }
-  }, [data]);
+  }, [JSON.stringify(data)]);
 
   // default value by index added or changed
   useEffect(() => {
@@ -23,7 +23,7 @@ export const useSelectDropdown = (data, defaultValueByIndex, defaultValue, disab
         selectItem(defaultValueByIndex);
       }
     }
-  }, [defaultValueByIndex]);
+  }, [JSON.stringify(defaultValueByIndex)]);
   // default value added or changed
   useEffect(() => {
     // defaultValue may be equals zero
@@ -32,14 +32,14 @@ export const useSelectDropdown = (data, defaultValueByIndex, defaultValue, disab
         selectItem(findIndexInArr(defaultValue, data));
       }
     }
-  }, [defaultValue]);
+  }, [JSON.stringify(defaultValue)]);
 
   const dataArr = useMemo(() => {
     if (disabledInternalSearch) {
       return data;
     }
     return searchTxt ? deepSearchInArr(searchTxt, data) : data;
-  }, [data, searchTxt]);
+  }, [JSON.stringify(data), searchTxt]);
 
   const selectItem = index => {
     setSelectedItem(data[index]);

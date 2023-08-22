@@ -10,6 +10,7 @@ import DropdownWindow from './components/DropdownWindow';
 import {useSelectDropdown} from './hooks/useSelectDropdown';
 import {useLayoutDropdown} from './hooks/useLayoutDropdown';
 import {useRefs} from './hooks/useRefs';
+import {findIndexInArr} from './helpers/findIndexInArr';
 
 const SelectDropdown = (
   {
@@ -116,9 +117,10 @@ const SelectDropdown = (
     }
   };
   const onSelectItem = (item, index) => {
+    const indexInOriginalArr = findIndexInArr(item, data);
     closeDropdown();
-    onSelect && onSelect(item, index);
-    selectItem(index);
+    onSelect && onSelect(item, indexInOriginalArr);
+    selectItem(indexInOriginalArr);
   };
   /* ******************** Render Methods ******************** */
   const renderSearchView = () => {
@@ -143,7 +145,8 @@ const SelectDropdown = (
     );
   };
   const renderFlatlistItem = ({item, index}) => {
-    const isSelected = index == selectedIndex;
+    const selectedItemIndex = findIndexInArr(selectedItem, dataArr);
+    const isSelected = index == selectedItemIndex;
     return (
       isExist(item) && (
         <TouchableOpacity
