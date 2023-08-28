@@ -1,5 +1,5 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import React, {useRef, useEffect, useState, forwardRef, useImperativeHandle} from 'react';
+import {Animated, View, Text, TouchableOpacity, FlatList} from 'react-native';
 import styles from './styles';
 import {isExist} from './helpers/isExist';
 import {mergeStyles} from './helpers/mergeStyles';
@@ -59,6 +59,7 @@ const SelectDropdown = (
 ) => {
   const disabledInternalSearch = !!onChangeSearchInputText;
   /* ******************* hooks ******************* */
+  const fadeAnim = useRef(new Animated.Value(0)).current;
   const {dropdownButtonRef, dropDownFlatlistRef} = useRefs();
   const {
     dataArr, //
@@ -92,6 +93,34 @@ const SelectDropdown = (
       selectItem(index);
     },
   }));
+
+  const [initClose, setInitClose] = useState(false);
+
+  const fadeInOut = value => {
+    Animated.timing(fadeAnim, {
+      toValue: value,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      if (initClose) {
+        setIsVisible(false);
+        setInitClose(false);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      fadeInOut(1);
+    }
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (initClose) {
+      fadeInOut(0);
+    }
+  }, [initClose]);
+
   /* ******************* Methods ******************* */
   const openDropdown = () => {
     dropdownButtonRef.current.measure((fx, fy, w, h, px, py) => {
@@ -101,7 +130,7 @@ const SelectDropdown = (
     });
   };
   const closeDropdown = () => {
-    setIsVisible(false);
+    setInitClose(true);
     setSearchTxt('');
     onBlur && onBlur();
   };
@@ -172,23 +201,25 @@ const SelectDropdown = (
     return (
       isVisible && (
         <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible} onRequestClose={onRequestClose}>
-          <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
-          <DropdownWindow layoutStyle={dropdownWindowStyle}>
-            <FlatList
-              data={dataArr}
-              keyExtractor={(item, index) => index.toString()}
-              ref={dropDownFlatlistRef}
-              renderItem={renderFlatlistItem}
-              getItemLayout={getItemLayout}
-              onLayout={onLayout}
-              ListHeaderComponent={renderSearchView()}
-              stickyHeaderIndices={search && [0]}
-              keyboardShouldPersistTaps="always"
-              onEndReached={() => onScrollEndReached && onScrollEndReached()}
-              onEndReachedThreshold={0.5}
-              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-            />
-          </DropdownWindow>
+          <Animated.View style={{opacity: fadeAnim}}>
+            <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
+            <DropdownWindow layoutStyle={dropdownWindowStyle}>
+              <FlatList
+                data={dataArr}
+                keyExtractor={(item, index) => index.toString()}
+                ref={dropDownFlatlistRef}
+                renderItem={renderFlatlistItem}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
+                ListHeaderComponent={renderSearchView()}
+                stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
+                onEndReached={() => onScrollEndReached && onScrollEndReached()}
+                onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              />
+            </DropdownWindow>
+          </Animated.View>
         </DropdownModal>
       )
     );
