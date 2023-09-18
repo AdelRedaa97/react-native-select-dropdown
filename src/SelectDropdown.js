@@ -54,6 +54,10 @@ const SelectDropdown = (
     renderSearchInputLeftIcon /* function returns React component for search input icon */,
     renderSearchInputRightIcon /* function returns React component for search input icon */,
     onChangeSearchInputText /* function callback when the search input text changes, this will automatically disable the dropdown's interna search to be implemented manually outside the component  */,
+    /////////////////////////////
+    accessible /* boolean */,
+    accessibilityLabel /* string */,
+    testID /* string */
   },
   ref,
 ) => {
@@ -196,6 +200,7 @@ const SelectDropdown = (
   ///////////////////////////////////////////////////////
   return (
     <TouchableOpacity
+      {...{accessible, accessibilityLabel, testID}}
       activeOpacity={0.8}
       ref={dropdownButtonRef}
       disabled={disabled}
