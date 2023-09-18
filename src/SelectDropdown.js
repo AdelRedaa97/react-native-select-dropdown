@@ -57,7 +57,7 @@ const SelectDropdown = (
     /////////////////////////////
     accessible /* boolean */,
     accessibilityLabel /* string */,
-    testID /* string */
+    testID /* string */,
   },
   ref,
 ) => {
