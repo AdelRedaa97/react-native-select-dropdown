@@ -54,6 +54,8 @@ const SelectDropdown = (
     renderSearchInputLeftIcon /* function returns React component for search input icon */,
     renderSearchInputRightIcon /* function returns React component for search input icon */,
     onChangeSearchInputText /* function callback when the search input text changes, this will automatically disable the dropdown's interna search to be implemented manually outside the component  */,
+      /////////////////////////////
+    overlayAccessibilityLabel,  /* string */
   },
   ref,
 ) => {
@@ -172,7 +174,7 @@ const SelectDropdown = (
     return (
       isVisible && (
         <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible} onRequestClose={onRequestClose}>
-          <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
+          <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} overlayAccessibilityLabel={overlayAccessibilityLabel} />
           <DropdownWindow layoutStyle={dropdownWindowStyle}>
             <FlatList
               data={dataArr}

@@ -119,9 +119,13 @@ declare module 'react-native-select-dropdown' {
      * text color for search input placeholder
      */
     searchPlaceHolderColor?: string;
+    /** 
+     * accessibilityLabel for overlay
+    */
+    overlayAccessibilityLabel?: string;
     /**
      * function callback when the search input text changes, this will automatically disable the dropdown's internal search to be implemented manually outside the component
-     */
+    */
     onChangeSearchInputText?: (searchText: string) => void;
     /**
      * function returns React component for search input icon
