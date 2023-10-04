@@ -202,7 +202,7 @@ const SelectDropdown = (
       onPress={openDropdown}
       style={mergeStyles(
         styles.dropdownButton,
-        dropdownIconPosition == 'left' ? styles.row : styles.rowRevese,
+        dropdownIconPosition == 'left' ? styles.row : styles.rowReverse,
         buttonStyle,
       )}>
       {renderDropdown()}

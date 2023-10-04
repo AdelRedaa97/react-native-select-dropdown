@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  rowRevese: {
+  rowReverse: {
     flexDirection: 'row-reverse',
   },
   dropdownButton: {
