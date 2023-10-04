@@ -1,11 +1,11 @@
-import {StyleSheet, Dimensions} from 'react-native';
-const {width} = Dimensions.get('window');
+import { StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  rowRevese: {
+  rowReverse: {
     flexDirection: 'row-reverse',
   },
   dropdownButton: {
