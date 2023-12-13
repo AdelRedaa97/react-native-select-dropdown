@@ -38,6 +38,7 @@ const SelectDropdown = (
     dropdownStyle,
     dropdownOverlayColor /* string */,
     showsVerticalScrollIndicator,
+    YDropdownOffset /* integer */,
     /////////////////////////////
     rowStyle /* style object for row */,
     rowTextStyle /* style object for row text */,
@@ -77,7 +78,7 @@ const SelectDropdown = (
     getItemLayout,
     dropdownWindowStyle,
     onRequestClose,
-  } = useLayoutDropdown(data, dropdownStyle, rowStyle, search);
+  } = useLayoutDropdown(data, dropdownStyle, rowStyle, search, YDropdownOffset);
   useImperativeHandle(ref, () => ({
     reset: () => {
       reset();

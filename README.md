@@ -102,6 +102,8 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`showsVerticalScrollIndicator`](#showsVerticalScrollIndicator)
 
+- [`YDropdownOffset`](#YDropdownOffset)
+
 - [`rowStyle`](#rowStyle)
 
 - [`rowTextStyle`](#rowTextStyle)
@@ -358,6 +360,16 @@ When true, shows a vertical scroll indicator.
 | Type    | Required |
 | ------- | -------- |
 | boolean | No       |
+
+---
+
+### YDropdownOffset
+
+Offset between button and dropdown view on Y axis
+
+| Type    | Required |
+| ------- | -------- |
+| integer | no       |
 
 ---
 
