@@ -168,26 +168,66 @@ const SelectDropdown = (
       )
     );
   };
+  const renderEmptyFlatlist = ({item, index}) => {
+    const selectedItemIndex = findIndexInArr(selectedItem, dataArr);
+    const isSelected = index == selectedItemIndex;
+    return (
+      isExist(item) && (
+        <TouchableOpacity
+          disabled={disabledIndexs?.includes(index)}
+          activeOpacity={0.8}
+          style={mergeStyles(styles.dropdownRow, rowStyle, isSelected && selectedRowStyle)}>
+          {renderCustomizedRowChild ? (
+            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index, isSelected)}</View>
+          ) : (
+            <Text
+              numberOfLines={1}
+              allowFontScaling={false}
+              style={mergeStyles(styles.dropdownRowText, rowTextStyle, isSelected && selectedRowTextStyle)}>
+              {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
+            </Text>
+          )}
+        </TouchableOpacity>
+      )
+    );
+  };
   const renderDropdown = () => {
     return (
       isVisible && (
         <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible} onRequestClose={onRequestClose}>
           <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
           <DropdownWindow layoutStyle={dropdownWindowStyle}>
-            <FlatList
-              data={dataArr}
-              keyExtractor={(item, index) => index.toString()}
-              ref={dropDownFlatlistRef}
-              renderItem={renderFlatlistItem}
-              getItemLayout={getItemLayout}
-              onLayout={onLayout}
-              ListHeaderComponent={renderSearchView()}
-              stickyHeaderIndices={search && [0]}
-              keyboardShouldPersistTaps="always"
-              onEndReached={() => onScrollEndReached && onScrollEndReached()}
-              onEndReachedThreshold={0.5}
-              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-            />
+            {dataArr.length === 0 ? (
+              <FlatList
+                data={['NO RESULT']}
+                keyExtractor={(item, index) => index.toString()}
+                ref={dropDownFlatlistRef}
+                renderItem={renderEmptyFlatlist}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
+                ListHeaderComponent={renderSearchView()}
+                stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
+                onEndReached={() => onScrollEndReached && onScrollEndReached()}
+                onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              />
+            ) : (
+              <FlatList
+                data={dataArr}
+                keyExtractor={(item, index) => index.toString()}
+                ref={dropDownFlatlistRef}
+                renderItem={renderFlatlistItem}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
+                ListHeaderComponent={renderSearchView()}
+                stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
+                onEndReached={() => onScrollEndReached && onScrollEndReached()}
+                onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              />
+            )}
           </DropdownWindow>
         </DropdownModal>
       )
