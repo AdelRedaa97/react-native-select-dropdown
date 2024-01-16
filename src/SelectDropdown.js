@@ -44,6 +44,7 @@ const SelectDropdown = (
     selectedRowStyle /* style object for selected row */,
     selectedRowTextStyle /* style object for selected row text */,
     renderCustomizedRowChild /* function returns React component for customized row */,
+    renderEmptyCustomizedRowChild /* function returns React component for customized row when no search result */,
     /////////////////////////////
     search /* boolean */,
     searchInputStyle /* style object for search input */,
@@ -168,26 +169,56 @@ const SelectDropdown = (
       )
     );
   };
+  const renderEmtplyFlatlistItem = () => {
+    return (
+      <TouchableOpacity activeOpacity={0.8} style={mergeStyles(styles.dropdownRow, rowStyle)}>
+        {renderEmptyCustomizedRowChild ? (
+          <View style={styles.dropdownCustomizedRowParent}>{renderEmptyCustomizedRowChild()}</View>
+        ) : (
+          <Text numberOfLines={1} allowFontScaling={false} style={mergeStyles(styles.dropdownRowText, rowTextStyle)}>
+            NO RESULT
+          </Text>
+        )}
+      </TouchableOpacity>
+    );
+  };
   const renderDropdown = () => {
     return (
       isVisible && (
         <DropdownModal statusBarTranslucent={statusBarTranslucent} visible={isVisible} onRequestClose={onRequestClose}>
           <DropdownOverlay onPress={closeDropdown} backgroundColor={dropdownOverlayColor} />
           <DropdownWindow layoutStyle={dropdownWindowStyle}>
-            <FlatList
-              data={dataArr}
-              keyExtractor={(item, index) => index.toString()}
-              ref={dropDownFlatlistRef}
-              renderItem={renderFlatlistItem}
-              getItemLayout={getItemLayout}
-              onLayout={onLayout}
-              ListHeaderComponent={renderSearchView()}
-              stickyHeaderIndices={search && [0]}
-              keyboardShouldPersistTaps="always"
-              onEndReached={() => onScrollEndReached && onScrollEndReached()}
-              onEndReachedThreshold={0.5}
-              showsVerticalScrollIndicator={showsVerticalScrollIndicator}
-            />
+            {dataArr.length === 0 ? (
+              <FlatList
+                data={['NO RESULT']}
+                keyExtractor={(item, index) => index.toString()}
+                ref={dropDownFlatlistRef}
+                renderItem={renderEmtplyFlatlistItem}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
+                ListHeaderComponent={renderSearchView()}
+                stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
+                onEndReached={() => onScrollEndReached && onScrollEndReached()}
+                onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              />
+            ) : (
+              <FlatList
+                data={dataArr}
+                keyExtractor={(item, index) => index.toString()}
+                ref={dropDownFlatlistRef}
+                renderItem={renderFlatlistItem}
+                getItemLayout={getItemLayout}
+                onLayout={onLayout}
+                ListHeaderComponent={renderSearchView()}
+                stickyHeaderIndices={search && [0]}
+                keyboardShouldPersistTaps="always"
+                onEndReached={() => onScrollEndReached && onScrollEndReached()}
+                onEndReachedThreshold={0.5}
+                showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              />
+            )}
           </DropdownWindow>
         </DropdownModal>
       )
