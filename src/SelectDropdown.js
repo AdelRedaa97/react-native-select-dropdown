@@ -44,6 +44,7 @@ const SelectDropdown = (
     selectedRowStyle /* style object for selected row */,
     selectedRowTextStyle /* style object for selected row text */,
     renderCustomizedRowChild /* function returns React component for customized row */,
+    renderEmptyCustomizedRowChild /* function returns React component for customized row when no search result */,
     /////////////////////////////
     search /* boolean */,
     searchInputStyle /* style object for search input */,
@@ -168,27 +169,17 @@ const SelectDropdown = (
       )
     );
   };
-  const renderEmptyFlatlist = ({item, index}) => {
-    const selectedItemIndex = findIndexInArr(selectedItem, dataArr);
-    const isSelected = index == selectedItemIndex;
+  const renderEmtplyFlatlistItem = () => {
     return (
-      isExist(item) && (
-        <TouchableOpacity
-          disabled={disabledIndexs?.includes(index)}
-          activeOpacity={0.8}
-          style={mergeStyles(styles.dropdownRow, rowStyle, isSelected && selectedRowStyle)}>
-          {renderCustomizedRowChild ? (
-            <View style={styles.dropdownCustomizedRowParent}>{renderCustomizedRowChild(item, index, isSelected)}</View>
-          ) : (
-            <Text
-              numberOfLines={1}
-              allowFontScaling={false}
-              style={mergeStyles(styles.dropdownRowText, rowTextStyle, isSelected && selectedRowTextStyle)}>
-              {rowTextForSelection ? rowTextForSelection(item, index) : item.toString()}
-            </Text>
-          )}
-        </TouchableOpacity>
-      )
+      <TouchableOpacity activeOpacity={0.8} style={mergeStyles(styles.dropdownRow, rowStyle)}>
+        {renderEmptyCustomizedRowChild ? (
+          <View style={styles.dropdownCustomizedRowParent}>{renderEmptyCustomizedRowChild()}</View>
+        ) : (
+          <Text numberOfLines={1} allowFontScaling={false} style={mergeStyles(styles.dropdownRowText, rowTextStyle)}>
+            NO RESULT
+          </Text>
+        )}
+      </TouchableOpacity>
     );
   };
   const renderDropdown = () => {
@@ -202,7 +193,7 @@ const SelectDropdown = (
                 data={['NO RESULT']}
                 keyExtractor={(item, index) => index.toString()}
                 ref={dropDownFlatlistRef}
-                renderItem={renderEmptyFlatlist}
+                renderItem={renderEmtplyFlatlistItem}
                 getItemLayout={getItemLayout}
                 onLayout={onLayout}
                 ListHeaderComponent={renderSearchView()}
