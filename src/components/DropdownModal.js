@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal} from 'react-native';
 
-const DropdownModal = ({visible, statusBarTranslucent, onRequestClose, children}) => {
+const DropdownModal = ({visible, statusBarTranslucent, onRequestClose, onShow, children}) => {
   const defaults = {
     statusBarTranslucent: statusBarTranslucent || false,
   };
@@ -12,7 +12,9 @@ const DropdownModal = ({visible, statusBarTranslucent, onRequestClose, children}
       animationType="none"
       transparent={true}
       statusBarTranslucent={defaults.statusBarTranslucent}
-      visible={visible}>
+      visible={visible}
+      onShow={onShow}
+    >
       {children}
     </Modal>
   );
