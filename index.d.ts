@@ -12,9 +12,13 @@ declare module 'react-native-select-dropdown' {
      */
     onSelect: (selectedItem: any, index: number) => void;
     /**
-     * default button text when no item is selected
+     * function returns React component for the dropdown button
      */
-    defaultButtonText?: string;
+    renderButton: (selectedItem: any, isOpened: boolean) => React.ReactNode;
+    /**
+     * function returns React component for each dropdown item
+     */
+    renderItem: (selectedItem: any, index: number, isSelected: boolean) => React.ReactNode;
     /**
      * default selected item in dropdown
      */
@@ -28,13 +32,17 @@ declare module 'react-native-select-dropdown' {
      */
     disabled?: boolean;
     /**
+     * array of disabled items index
+     */
+    disabledIndexes?: number[];
+    /**
      * disable auto scroll to selected value
      */
     disableAutoScroll?: boolean;
     /**
-     * disable click all Rows index in the list
+     * dropdown menu testID
      */
-    disabledIndexs?: number[];
+    testID?: string;
     /**
      * function fires when dropdown is opened
      */
@@ -47,22 +55,6 @@ declare module 'react-native-select-dropdown' {
      * function fires when dropdown reaches the end
      */
     onScrollEndReached?: () => void;
-    /**
-     * style object for button
-     */
-    buttonStyle?: StyleProp<ViewStyle>;
-    /**
-     * style object for button text
-     */
-    buttonTextStyle?: StyleProp<TextStyle>;
-    /**
-     * function that should return a React component for dropdown icon
-     */
-    renderDropdownIcon?: (selectedItem: any, index: number) => React.ReactNode;
-    /**
-     * dropdown icon position "left" || "right"
-     */
-    dropdownIconPosition?: 'left' | 'right';
     /**
      * required to set true when statusbar is translucent (android only)
      */
@@ -79,22 +71,6 @@ declare module 'react-native-select-dropdown' {
      * backdrop color when dropdown is opened
      */
     showsVerticalScrollIndicator?: boolean;
-    /**
-     * style object for row
-     */
-    rowStyle?: StyleProp<ViewStyle>;
-    /**
-     * style object for row text
-     */
-    rowTextStyle?: StyleProp<TextStyle>;
-    /**
-     * style object for selected row
-     */
-    selectedRowStyle?: StyleProp<ViewStyle>;
-    /**
-     * style object for selected row text
-     */
-    selectedRowTextStyle?: StyleProp<TextStyle>;
     /**
      * enable search functionality
      */
@@ -131,38 +107,11 @@ declare module 'react-native-select-dropdown' {
      * function returns React component for search input icon
      */
     renderSearchInputRightIcon?: (selectedItem: any, index: number) => React.ReactNode;
-  } & (
-    | {
-        /**
-         * function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
-         */
-        buttonTextAfterSelection: (selectedItem: any, index: number) => string;
-      }
-    | {
-        /**
-         * function recieves selected item and its index, this function should return a React component as a child for dropdown button buttonStyle should be used for parent button view style.
-         */
-        renderCustomizedButtonChild?: (selectedItem: any, index: number) => React.ReactNode;
-      }
-  ) &
-    (
-      | {
-          /**
-           * function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
-           */
-          rowTextForSelection: (item: any, index: number) => string;
-        }
-      | {
-          /**
-           * function recieves item and its index, this function should return React component as a child for customized row rowStyle should be used for parent row view style.
-           */
-          renderCustomizedRowChild?: (selectedItem: any, index: number, isSelected?: boolean) => React.ReactNode;
-        }
-    );
+  };
 
   export default class SelectDropdown extends React.Component<SelectDropdownProps> {
     /**
-     * Remove selection & reset it to display defaultButtonText check
+     * Remove selection & reset it
      */
     reset(): void;
     /**

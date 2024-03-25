@@ -21,39 +21,128 @@ yarn add react-native-select-dropdown
 #### Code provided in Examples folder.
 
 <p float="left">
-	<img src="https://i.postimg.cc/4yYR8V3L/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-35-46.gif" width="300" height="650">
-	<img src="https://i.postimg.cc/m2fkJgQX/Simulator-Screen-Recording-i-Phone-13-Pro-2022-03-28-at-21-43-59.gif" width="300" height="650">
+	<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbms4YWRncmdudjFlMmx2bHc1a2hzNWw3bno0cGtrdXkxYTlyN2oxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RymCaYuta5eMPILl3n/giphy.gif" width="300" height="650">
+	<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTlkcGJxaDJ5ZWJ0NjdmM3ZjN3EwZzhudDcxZmNjMnh0NmZ6ZzZscyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nRi2BIZ67JTsb2CXOK/source.gif" width="300" height="650">
+	<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW95emwzdG1kdXlrdzV2YWp5cXd5eThodWplZzc2dmViaTFyZGp4dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5K2jqeCXiyLeIWSyEg/giphy.gif" width="300" height="650">
 </p>
 
 #### Search Functionality (Code provided in Examples folder).
 
 <p float="left">
-	<img src="https://i.postimg.cc/GmYnZVF0/Simulator-Screen-Recording-i-Phone-12-Pro-2022-05-31-at-13-58-28.gif" width="300" height="650">
+	<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjVoemczdHdoc2ZxajgwN3RhaTM5MGhhaG1yZGY4MGhqaWxlMW9rYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q4jfg5sUF6k648goG4/giphy.gif" width="300" height="650">
 </p>
+
+## 🚀 Major Changes
+
+### Version 4.0
+
+- (defaultButtonText, buttonTextAfterSelection, buttonStyle, buttonTextStyle, renderCustomizedButtonChild, renderDropdownIcon, dropdownIconPosition) have been removed and (renderButton) has been added to customize dropdown button
+- (rowTextForSelection, rowStyle, rowTextStyle, selectedRowStyle, selectedRowTextStyle, renderCustomizedRowChild) have been removed and (renderItem) has been added to customize each dropdown item
+- testID added to scroll the dropdown menu in e2e tests.
+- Most of issues have been fixed.
+- Updated readme.md file
+- More examples in examples folder.
 
 ## Usage
 
 ```
 import SelectDropdown from 'react-native-select-dropdown'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 ...
-const countries = ["Egypt", "Canada", "Australia", "Ireland"]
+  const emojisWithIcons = [
+    {title: 'happy', icon: 'emoticon-happy-outline'},
+    {title: 'cool', icon: 'emoticon-cool-outline'},
+    {title: 'lol', icon: 'emoticon-lol-outline'},
+    {title: 'sad', icon: 'emoticon-sad-outline'},
+    {title: 'cry', icon: 'emoticon-cry-outline'},
+    {title: 'angry', icon: 'emoticon-angry-outline'},
+    {title: 'confused', icon: 'emoticon-confused-outline'},
+    {title: 'excited', icon: 'emoticon-excited-outline'},
+    {title: 'kiss', icon: 'emoticon-kiss-outline'},
+    {title: 'devil', icon: 'emoticon-devil-outline'},
+    {title: 'dead', icon: 'emoticon-dead-outline'},
+    {title: 'wink', icon: 'emoticon-wink-outline'},
+    {title: 'sick', icon: 'emoticon-sick-outline'},
+    {title: 'frown', icon: 'emoticon-frown-outline'},
+  ];
 ...
-<SelectDropdown
-	data={countries}
-	onSelect={(selectedItem, index) => {
-		console.log(selectedItem, index)
-	}}
-	buttonTextAfterSelection={(selectedItem, index) => {
-		// text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>
+  <SelectDropdown
+    data={emojisWithIcons}
+    onSelect={(selectedItem, index) => {
+      console.log(selectedItem, index);
+    }}
+    renderButton={(selectedItem, isOpened) => {
+      return (
+        <View style={styles.dropdownButtonStyle}>
+          {selectedItem && (
+            <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+          )}
+          <Text style={styles.dropdownButtonTxtStyle}>
+            {(selectedItem && selectedItem.title) || 'Select your mood'}
+          </Text>
+          <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} />
+        </View>
+      );
+    }}
+    renderItem={(item, index, isSelected) => {
+      return (
+        <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+          <Icon name={item.icon} style={styles.dropdownItemIconStyle} />
+          <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+        </View>
+      );
+    }}
+    showsVerticalScrollIndicator={false}
+    dropdownStyle={styles.dropdownMenuStyle}
+  />
+...
+  const styles = StyleSheet.create({
+    dropdownButtonStyle: {
+      width: 200,
+      height: 50,
+      backgroundColor: '#E9ECEF',
+      borderRadius: 12,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 12,
+    },
+    dropdownButtonTxtStyle: {
+      flex: 1,
+      fontSize: 18,
+      fontWeight: '500',
+      color: '#151E26',
+    },
+    dropdownButtonArrowStyle: {
+      fontSize: 28,
+    },
+    dropdownButtonIconStyle: {
+      fontSize: 28,
+      marginRight: 8,
+    },
+    dropdownMenuStyle: {
+      backgroundColor: '#E9ECEF',
+      borderRadius: 8,
+    },
+    dropdownItemStyle: {
+      width: '100%',
+      flexDirection: 'row',
+      paddingHorizontal: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 8,
+    },
+    dropdownItemTxtStyle: {
+      flex: 1,
+      fontSize: 18,
+      fontWeight: '500',
+      color: '#151E26',
+    },
+    dropdownItemIconStyle: {
+      fontSize: 28,
+      marginRight: 8,
+    },
+  });
 ```
 
 ### Props
@@ -62,11 +151,9 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`onSelect`](#onSelect)
 
-- [`defaultButtonText`](#defaultButtonText)
+- [`renderButton`](#renderButton)
 
-- [`buttonTextAfterSelection`](#buttonTextAfterSelection)
-
-- [`rowTextForSelection`](#rowTextForSelection)
+- [`renderItem`](#renderItem)
 
 - [`defaultValue`](#defaultValue)
 
@@ -74,25 +161,17 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 - [`disabled`](#disabled)
 
+- [`disabledIndexes`](#disabledIndexes)
+
 - [`disableAutoScroll`](#disableAutoScroll)
 
-- [`disabledIndexs`](#disabledIndexs)
+- [`testID`](#testID)
 
 - [`onFocus`](#onFocus)
 
 - [`onBlur`](#onBlur)
 
 - [`onScrollEndReached`](#onScrollEndReached)
-
-- [`buttonStyle`](#buttonStyle)
-
-- [`buttonTextStyle`](#buttonTextStyle)
-
-- [`renderCustomizedButtonChild`](#renderCustomizedButtonChild)
-
-- [`renderDropdownIcon`](#renderDropdownIcon)
-
-- [`dropdownIconPosition`](#dropdownIconPosition)
 
 - [`statusBarTranslucent`](#statusBarTranslucent)
 
@@ -101,16 +180,6 @@ const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 - [`dropdownOverlayColor`](#dropdownOverlayColor)
 
 - [`showsVerticalScrollIndicator`](#showsVerticalScrollIndicator)
-
-- [`rowStyle`](#rowStyle)
-
-- [`rowTextStyle`](#rowTextStyle)
-
-- [`selectedRowStyle`](#selectedRowStyle)
-
-- [`selectedRowTextStyle`](#selectedRowTextStyle)
-
-- [`renderCustomizedRowChild`](#renderCustomizedRowChild)
 
 - [`search`](#search)
 
@@ -159,33 +228,23 @@ function recieves selected item and its index in data array
 
 ---
 
-### defaultButtonText
+### renderButton
 
-default button text when no item is selected
+function returns React component for the dropdown button
 
-| Type   | Required |
-| ------ | -------- |
-| String | No       |
-
----
-
-### buttonTextAfterSelection
-
-function recieves selected item and its index, this function should return a string that will be represented in button after item is selected
-
-| Type     | Required                                                             |
-| -------- | -------------------------------------------------------------------- |
-| function | Yes "unless you customized button using renderCustomizedButtonChild" |
+| Type     | Required |
+| -------- | -------- |
+| function | Yes      |
 
 ---
 
-### rowTextForSelection
+### renderItem
 
-function recieves item and index for each row in dropdown, this function shoud return a string that will be represented in each row in dropdown
+function returns React component for each dropdown item
 
-| Type     | Required                                                          |
-| -------- | ----------------------------------------------------------------- |
-| function | Yes "unless you customized button using renderCustomizedRowChild" |
+| Type     | Required |
+| -------- | -------- |
+| function | Yes      |
 
 ---
 
@@ -219,6 +278,16 @@ disable dropdown
 
 ---
 
+### disabledIndexes
+
+array of disabled items index
+
+| Type  | Required |
+| ----- | -------- |
+| array | No       |
+
+---
+
 ### disableAutoScroll
 
 disable auto scroll to selected value
@@ -229,13 +298,13 @@ disable auto scroll to selected value
 
 ---
 
-### disabledIndexs
+### testID
 
-disable choose all Rows index in the list
+dropdown menu testID
 
-| Type  | Required |
-| ----- | -------- |
-| array | No       |
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ---
 
@@ -266,58 +335,6 @@ function fires when dropdown scrolls to the end (for paginations)
 | Type     | Required |
 | -------- | -------- |
 | function | No       |
-
----
-
-### buttonStyle
-
-style object for button
-
-| Type   | Required |
-| ------ | -------- |
-| object | Yes      |
-
----
-
-### buttonTextStyle
-
-style object for button text
-
-| Type   | Required |
-| ------ | -------- |
-| object | No       |
-
----
-
-### renderCustomizedButtonChild
-
-function recieves selected item and its index, this function should return a React component as a child for dropdown button `buttonStyle` should be used for parent button view style.
-
-#### # check examples folder to make things clear
-
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
-
----
-
-### renderDropdownIcon
-
-function that should return a React component for dropdown icon
-
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
-
----
-
-### dropdownIconPosition
-
-dropdown icon position "left" || "right"
-
-| Type   | Required |
-| ------ | -------- |
-| string | No       |
 
 ---
 
@@ -358,58 +375,6 @@ When true, shows a vertical scroll indicator.
 | Type    | Required |
 | ------- | -------- |
 | boolean | No       |
-
----
-
-### rowStyle
-
-style object for row
-
-| Type   | Required |
-| ------ | -------- |
-| object | Yes      |
-
----
-
-### rowTextStyle
-
-style object for row text
-
-| Type   | Required |
-| ------ | -------- |
-| object | No       |
-
----
-
-### selectedRowStyle
-
-style object for selected row
-
-| Type   | Required |
-| ------ | -------- |
-| object | Yes      |
-
----
-
-### selectedRowTextStyle
-
-style object for selected row text
-
-| Type   | Required |
-| ------ | -------- |
-| object | No       |
-
----
-
-### renderCustomizedRowChild
-
-function recieves item and its index, this function should return React component as a child for customized row `rowStyle` should be used for parent row view style.
-
-#### # check examples folder to make things clear
-
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
 
 ---
 
@@ -503,12 +468,12 @@ function callback when the search input text changes, this will automatically di
 
 ---
 
-| Method               | Description                                                                                                                                                 |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `reset()`            | Remove selection & reset it to display `defaultButtonText` check https://github.com/AdelRedaa97/react-native-select-dropdown/pull/1#issuecomment-818307624. |
-| `openDropdown()`     | Open the dropdown.                                                                                                                                          |
-| `closeDropdown()`    | Close the dropdown.                                                                                                                                         |
-| `selectIndex(index)` | Select a specific item by index.                                                                                                                            |
+| Method               | Description                      |
+| -------------------- | -------------------------------- |
+| `reset()`            | Remove selection & reset it      |
+| `openDropdown()`     | Open the dropdown.               |
+| `closeDropdown()`    | Close the dropdown.              |
+| `selectIndex(index)` | Select a specific item by index. |
 
 ---
 

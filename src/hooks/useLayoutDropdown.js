@@ -1,63 +1,76 @@
 import {useEffect, useState, useMemo} from 'react';
 import {I18nManager, Dimensions} from 'react-native';
-import {calculateDropdownHeight} from '../helpers/calculateDropdownHeight';
-import {useKeyboardRemainingScreenHeight} from './useKeyboardRemainingScreenHeight';
+import {getDropdownHeight} from '../helpers/getDropdownHeight';
+import {useKeyboardHeight} from './useKeyboardHeight';
 const {height} = Dimensions.get('window');
+const DROPDOWN_MAX_HEIGHT = height * 0.4;
 
-export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
+export const useLayoutDropdown = (data, dropdownStyle) => {
   const [isVisible, setIsVisible] = useState(false); // dropdown visible ?
   const [buttonLayout, setButtonLayout] = useState(null);
-  const [dropdownPX, setDropdownPX] = useState(0); // position x
-  const [dropdownPY, setDropdownPY] = useState(0); // position y
+  const [dropdownCalculatedStyle, setDropdownCalculatedStyle] = useState({});
+
   const [dropdownHEIGHT, setDropdownHEIGHT] = useState(() => {
-    return calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search);
+    return getDropdownHeight(dropdownStyle, data?.length || 0);
   }); // dropdown height
-  const [dropdownWIDTH, setDropdownWIDTH] = useState(0); // dropdown width
-  const remainigHeightAvoidKeyboard = useKeyboardRemainingScreenHeight();
-  const safeDropdownViewUnderKeyboard = rowStyle && rowStyle.height ? rowStyle.height * 3 : 50 * 3;
+
+  const {keyboardHeight} = useKeyboardHeight();
 
   useEffect(() => {
-    setDropdownHEIGHT(calculateDropdownHeight(dropdownStyle, rowStyle, data?.length || 0, search));
-  }, [dropdownStyle, rowStyle, data]);
+    setDropdownHEIGHT(getDropdownHeight(dropdownStyle, data?.length || 0));
+  }, [JSON.stringify(dropdownStyle), JSON.stringify(data)]);
 
   const onDropdownButtonLayout = (w, h, px, py) => {
     setButtonLayout({w, h, px, py});
-    if (height - 18 < py + h + dropdownHEIGHT) {
-      setDropdownPX(px);
-      setDropdownPY(py - 2 - dropdownHEIGHT);
-    } else {
-      setDropdownPX(px);
-      setDropdownPY(py + h + 2);
+
+    const remainingHeight = dropdownStyle?.height || height / 4;
+
+    if (py + h > height - remainingHeight) {
+      return setDropdownCalculatedStyle({
+        bottom: height - (py + h) + h,
+        width: dropdownStyle?.width || w,
+        ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
+      });
     }
-    setDropdownWIDTH(dropdownStyle?.width || w);
+
+    return setDropdownCalculatedStyle({
+      top: py + h + 2,
+      width: dropdownStyle?.width || w,
+      ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
+    });
   };
 
-  const getItemLayout = (flatlistData, index) => ({
-    index,
-    length: flatlistData?.length || 0,
-    offset: rowStyle && rowStyle.height ? rowStyle.height * index : 50 * index,
-  });
-
   const dropdownWindowStyle = useMemo(() => {
-    const top =
-      remainigHeightAvoidKeyboard < dropdownPY + safeDropdownViewUnderKeyboard
-        ? remainigHeightAvoidKeyboard - safeDropdownViewUnderKeyboard
-        : dropdownPY;
+    // minimum dropdownheight to show while keyboard is opened
+    const minDropdownHeight = 200;
+    const getPositionIfKeyboardIsOpened = () => {
+      if (keyboardHeight) {
+        if (dropdownCalculatedStyle.top && height - dropdownCalculatedStyle.top < keyboardHeight + minDropdownHeight) {
+          return {top: height - (keyboardHeight + minDropdownHeight), minHeight: minDropdownHeight};
+        }
+        if (dropdownCalculatedStyle.bottom && dropdownCalculatedStyle.bottom < keyboardHeight - minDropdownHeight) {
+          return {top: height - (keyboardHeight + minDropdownHeight), bottom: undefined, minHeight: minDropdownHeight};
+        }
+        return {minHeight: minDropdownHeight};
+      }
+      return {};
+    };
+
     return {
       ...{
         borderTopWidth: 0,
         overflow: 'hidden',
       },
       ...dropdownStyle,
+      ...dropdownCalculatedStyle,
       ...{
         position: 'absolute',
-        top: top,
         height: dropdownHEIGHT,
-        width: dropdownWIDTH,
+        maxHeight: DROPDOWN_MAX_HEIGHT,
       },
-      ...(I18nManager.isRTL ? {right: dropdownStyle?.right || dropdownPX} : {left: dropdownStyle?.left || dropdownPX}),
+      ...getPositionIfKeyboardIsOpened(),
     };
-  }, [dropdownStyle, remainigHeightAvoidKeyboard, dropdownPX, dropdownPY, dropdownHEIGHT, dropdownWIDTH]);
+  }, [JSON.stringify(dropdownStyle), JSON.stringify(dropdownCalculatedStyle), keyboardHeight, dropdownHEIGHT]);
 
   const onRequestClose = () => {
     setIsVisible(false);
@@ -68,7 +81,6 @@ export const useLayoutDropdown = (data, dropdownStyle, rowStyle, search) => {
     setIsVisible,
     buttonLayout,
     onDropdownButtonLayout,
-    getItemLayout,
     dropdownWindowStyle,
     onRequestClose,
   };
