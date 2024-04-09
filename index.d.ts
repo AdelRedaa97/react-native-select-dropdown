@@ -64,11 +64,11 @@ declare module 'react-native-select-dropdown' {
      */
     dropdownStyle?: StyleProp<ViewStyle>;
     /**
-     * When true, shows a vertical scroll indicator in the dropdown.
+     * backdrop color when dropdown is opened
      */
     dropdownOverlayColor?: string;
     /**
-     * backdrop color when dropdown is opened
+     * When true, shows a vertical scroll indicator in the dropdown.
      */
     showsVerticalScrollIndicator?: boolean;
     /**

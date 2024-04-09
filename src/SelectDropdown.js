@@ -110,6 +110,17 @@ const SelectDropdown = (
     onSelect && onSelect(item, indexInOriginalArr);
     selectItem(indexInOriginalArr);
   };
+  const onScrollToIndexFailed = error => {
+    dropDownFlatlistRef.current.scrollToOffset({
+      offset: error.averageItemLength * error.index,
+      animated: true,
+    });
+    setTimeout(() => {
+      if (dataArr.length !== 0 && dropDownFlatlistRef) {
+        dropDownFlatlistRef.current.scrollToIndex({index: error.index, animated: true});
+      }
+    }, 100);
+  };
   /* ******************** Render Methods ******************** */
   const renderSearchView = () => {
     return (
@@ -168,6 +179,7 @@ const SelectDropdown = (
               onEndReached={() => onScrollEndReached && onScrollEndReached()}
               onEndReachedThreshold={0.5}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
+              onScrollToIndexFailed={onScrollToIndexFailed}
             />
           </DropdownWindow>
         </DropdownModal>
