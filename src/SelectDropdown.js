@@ -40,6 +40,7 @@ const SelectDropdown = (
     renderSearchInputLeftIcon /* function returns React component for search input icon */,
     renderSearchInputRightIcon /* function returns React component for search input icon */,
     onChangeSearchInputText /* function callback when the search input text changes, this will automatically disable the dropdown's interna search to be implemented manually outside the component  */,
+    searchInputTextValue /* search input text value for controlled search input */,
   },
   ref,
 ) => {
@@ -127,7 +128,7 @@ const SelectDropdown = (
       search && (
         <Input
           searchViewWidth={buttonLayout.w}
-          value={searchTxt}
+          value={searchInputTextValue ?? searchTxt}
           valueColor={searchInputTxtColor}
           placeholder={searchPlaceHolder}
           placeholderTextColor={searchPlaceHolderColor}
