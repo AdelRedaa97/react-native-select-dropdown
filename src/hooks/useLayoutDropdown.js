@@ -24,18 +24,19 @@ export const useLayoutDropdown = (data, dropdownStyle) => {
     setButtonLayout({w, h, px, py});
 
     const remainingHeight = dropdownStyle?.height || height / 4;
+    const dropdownWIDTH = dropdownStyle?.width || w
 
     if (py + h > height - remainingHeight) {
       return setDropdownCalculatedStyle({
         bottom: height - (py + h) + h,
-        width: dropdownStyle?.width || w,
+        width: dropdownWIDTH,
         ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
       });
     }
 
     return setDropdownCalculatedStyle({
       top: py + h + 2,
-      width: dropdownStyle?.width || w,
+      width: dropdownWIDTH,
       ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
     });
   };
