@@ -25,19 +25,20 @@ export const useLayoutDropdown = (data, dropdownStyle) => {
 
     const remainingHeight = dropdownStyle?.height || height / 4;
     const dropdownWIDTH = dropdownStyle?.width || w
+    const isWidthOverflow = dropdownWIDTH + px > width 
 
     if (py + h > height - remainingHeight) {
       return setDropdownCalculatedStyle({
         bottom: height - (py + h) + h,
         width: dropdownWIDTH,
-        ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
+        ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || (isWidthOverflow ? px - dropdownWIDTH + (dropdownStyle?.right || 0): px)}),
       });
     }
 
     return setDropdownCalculatedStyle({
       top: py + h + 2,
       width: dropdownWIDTH,
-      ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || px}),
+      ...(I18nManager.isRTL ? {right: dropdownStyle?.right || px} : {left: dropdownStyle?.left || (isWidthOverflow ? px - dropdownWIDTH + (dropdownStyle?.right || 0): px)}),
     });
   };
 
